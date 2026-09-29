@@ -1,0 +1,11 @@
+{
+  "name": "trailside-tour-guide",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Offline-first GPS audio tour guide PWA",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "test": "node --test tests/*.test.js"
+  }
+}
