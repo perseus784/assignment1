@@ -1,9 +1,9 @@
 import numpy as np
 import pytest
 
-from trailside.audio import dsp
-from trailside.audio.library import LIBRARY, THEME_SOUNDS
-from trailside.audio.render import encode_mp3, render_sound
+from cairn.audio import dsp
+from cairn.audio.library import LIBRARY, THEME_SOUNDS
+from cairn.audio.render import encode_mp3, render_sound
 
 
 def test_theme_sounds_exist_with_right_kinds():

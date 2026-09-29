@@ -1,5 +1,5 @@
 {
-  "note": "Demo fixture in the shape of the live Wikipedia/Wikidata pipeline output. Extracts were written for Trailside; sitelink counts are illustrative; coordinates are approximate.",
+  "note": "Demo fixture in the shape of the live Wikipedia/Wikidata pipeline output. Extracts were written for Cairn; sitelink counts are illustrative; coordinates are approximate.",
   "geocode": {
     "name": "Yellowstone National Park",
     "aliases": [

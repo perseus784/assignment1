@@ -1,6 +1,9 @@
-# Trailside: a GPS audio guide for any drive
+# Cairn: a GPS audio trail guide for any drive
 
-Start it as you set off. As you approach each place, Trailside plays a short produced
+*A cairn is the stack of stones travellers leave to mark the way. Cairn marks the places along
+your route and tells you their stories.*
+
+Start it as you set off. As you approach each place, Cairn plays a short produced
 episode about it, like a podcast that knows where you are. A calm **narrator** tells you what's
 coming up and on which side. A warm **storyteller** tells you why it matters. Ambience and
 effects fit the place: river water, birdsong, mountain wind, a geyser erupting, a steam
@@ -47,10 +50,10 @@ On a phone, serve over HTTPS (GPS and offline mode require it) and use **Add to 
 
 ```bash
 cd server
-../.venv/bin/python -m trailside build --query "Glacier National Park"            # live data
-../.venv/bin/python -m trailside build --route drive.json --name "Going-to-the-Sun Road"
-../.venv/bin/python -m trailside sounds --out /tmp/sounds                          # audition the sound library
-../.venv/bin/python -m trailside serve --port 8000
+../.venv/bin/python -m cairn build --query "Glacier National Park"            # live data
+../.venv/bin/python -m cairn build --route drive.json --name "Going-to-the-Sun Road"
+../.venv/bin/python -m cairn sounds --out /tmp/sounds                          # audition the sound library
+../.venv/bin/python -m cairn serve --port 8000
 ```
 
 ### Configuration (environment variables)
@@ -58,14 +61,14 @@ cd server
 | Variable | Purpose |
 | --- | --- |
 | `ANTHROPIC_API_KEY` | Enables the Claude script writer (`claude-opus-5-5`), grounded in the source text. Without it the deterministic template writer is used. |
-| `TRAILSIDE_WRITER` | `auto` (default), `claude`, or `template`. |
-| `TRAILSIDE_KOKORO_MODEL`, `TRAILSIDE_KOKORO_VOICES` | Paths to Kokoro-82M model files (see `server/requirements.txt`). Enables pre-rendered studio narration; without them the app uses on-device voices. |
-| `TRAILSIDE_NARRATOR_VOICE`, `TRAILSIDE_STORYTELLER_VOICE` | Kokoro voice ids (default `am_michael`, `af_heart`). |
-| `TRAILSIDE_PMTILES_SOURCE` | A Protomaps `.pmtiles` build. With the `pmtiles` CLI installed, each tour gets its own offline vector map. |
-| `TRAILSIDE_USER_AGENT` | Contact string sent to Wikipedia/Nominatim (required by their policies). |
-| `TRAILSIDE_OSRM_URL`, `TRAILSIDE_NOMINATIM_URL` | Point at your own instances in production. The public ones are for light use only. |
+| `CAIRN_WRITER` | `auto` (default), `claude`, or `template`. |
+| `CAIRN_KOKORO_MODEL`, `CAIRN_KOKORO_VOICES` | Paths to Kokoro-82M model files (see `server/requirements.txt`). Enables pre-rendered studio narration; without them the app uses on-device voices. |
+| `CAIRN_NARRATOR_VOICE`, `CAIRN_STORYTELLER_VOICE` | Kokoro voice ids (default `am_michael`, `af_heart`). |
+| `CAIRN_PMTILES_SOURCE` | A Protomaps `.pmtiles` build. With the `pmtiles` CLI installed, each tour gets its own offline vector map. |
+| `CAIRN_USER_AGENT` | Contact string sent to Wikipedia/Nominatim (required by their policies). |
+| `CAIRN_OSRM_URL`, `CAIRN_NOMINATIM_URL` | Point at your own instances in production. The public ones are for light use only. |
 
-## How the engine works (`server/trailside/`)
+## How the engine works (`server/cairn/`)
 
 1. **Discover** (`sources/`): tile the area (or a corridor along the route) with search circles and
    ask Wikipedia what's there, then fetch article intros and Wikidata facts: what kind of thing
@@ -107,7 +110,7 @@ A PWA in plain ES modules with no build step:
 - `map.js` uses vendored MapLibre with OpenFreeMap tiles online, a pack's PMTiles offline, or a
   plain canvas. The route and stops always draw.
 - `sw.js` provides offline caching, including Range requests for PMTiles.
-- **Navigate** hands off to Google Maps, Apple Maps or Waze. Trailside keeps narrating
+- **Navigate** hands off to Google Maps, Apple Maps or Waze. Cairn keeps narrating
   alongside it.
 
 ## Known limitations

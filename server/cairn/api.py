@@ -63,7 +63,7 @@ def create_app(tours_dir: Optional[Path] = None, serve_app: bool = True) -> Fast
     tours_dir = tours_dir or settings.tours_dir
     tours_dir.mkdir(parents=True, exist_ok=True)
     queue = JobQueue(tours_dir=tours_dir)
-    api = FastAPI(title="Trailside Engine", version="0.2.0")
+    api = FastAPI(title="Cairn Engine", version="0.2.0")
     api.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["GET", "POST"], allow_headers=["*"])
     api.add_middleware(GZipMiddleware, minimum_size=2000)
 

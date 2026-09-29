@@ -1,34 +1,6 @@
 {
  "tours": [
   {
-   "id": "yellowstone-geyser-country",
-   "name": "Yellowstone: Geyser Country",
-   "region": "Wyoming, USA",
-   "description": "Madison Junction to Craig Pass on the Grand Loop Road, through the Lower, Midway and Upper Geyser Basins.",
-   "center": [
-    44.517545454545456,
-    -110.82800909090909
-   ],
-   "bounds": {
-    "south": 44.41505066475027,
-    "west": -110.90181432742041,
-    "north": 44.67894933524973,
-    "east": -110.6912856725796
-   },
-   "stops": 11,
-   "routeLengthM": 33024,
-   "totalBytes": 4044096,
-   "version": 1,
-   "generatedAt": "2026-09-29T16:20:10Z",
-   "generator": {
-    "engine": "trailside-engine/0.2",
-    "writer": "template",
-    "tts": "device",
-    "source": "fixture:yellowstone"
-   },
-   "manifest": "yellowstone-geyser-country/manifest.json"
-  },
-  {
    "id": "million-dollar-highway",
    "name": "Million Dollar Highway",
    "region": "Colorado, USA",
@@ -47,14 +19,42 @@
    "routeLengthM": 26201,
    "totalBytes": 2676672,
    "version": 1,
-   "generatedAt": "2026-09-29T16:20:10Z",
+   "generatedAt": "2026-09-29T17:05:30Z",
    "generator": {
-    "engine": "trailside-engine/0.2",
+    "engine": "cairn-engine/0.2",
     "writer": "template",
     "tts": "device",
     "source": "fixture:san-juan-skyway"
    },
    "manifest": "million-dollar-highway/manifest.json"
+  },
+  {
+   "id": "yellowstone-geyser-country",
+   "name": "Yellowstone: Geyser Country",
+   "region": "Wyoming, USA",
+   "description": "Madison Junction to Craig Pass on the Grand Loop Road, through the Lower, Midway and Upper Geyser Basins.",
+   "center": [
+    44.517545454545456,
+    -110.82800909090909
+   ],
+   "bounds": {
+    "south": 44.41505066475027,
+    "west": -110.90181432742041,
+    "north": 44.67894933524973,
+    "east": -110.6912856725796
+   },
+   "stops": 11,
+   "routeLengthM": 33024,
+   "totalBytes": 4044096,
+   "version": 1,
+   "generatedAt": "2026-09-29T17:05:29Z",
+   "generator": {
+    "engine": "cairn-engine/0.2",
+    "writer": "template",
+    "tts": "device",
+    "source": "fixture:yellowstone"
+   },
+   "manifest": "yellowstone-geyser-country/manifest.json"
   }
  ]
 }

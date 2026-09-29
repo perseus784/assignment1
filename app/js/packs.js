@@ -1,9 +1,9 @@
-// Tour packs (Trailside Tour Format v2) — listing, downloading for offline use, loading.
+// Tour packs (Cairn Tour Format v2) — listing, downloading for offline use, loading.
 // A pack is a manifest.json plus audio files; "downloading" stores every file in the Cache API,
 // where the service worker serves them from when there's no signal.
 
-export const TOUR_CACHE = 'trailside-tours-v2';
-export const FORMAT = 'trailside.tour/2';
+export const TOUR_CACHE = 'cairn-tours-v1';
+export const FORMAT = 'cairn.tour/2';
 const BUNDLED_INDEX = 'packs/index.json';
 
 const hasCaches = () => typeof caches !== 'undefined';
@@ -47,7 +47,7 @@ export async function loadCatalog(serverUrl) {
 }
 
 // Remember catalog entries we've downloaded, so they're listed even when fully offline.
-const SAVED_KEY = 'trailside:downloaded';
+const SAVED_KEY = 'cairn:downloaded';
 function loadSavedEntries() {
   try { return JSON.parse(localStorage.getItem(SAVED_KEY)) ?? []; } catch { return []; }
 }

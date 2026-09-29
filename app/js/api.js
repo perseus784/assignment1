@@ -1,4 +1,4 @@
-// Client for the Trailside engine server.
+// Client for the Cairn engine server.
 
 export class EngineClient {
   constructor(baseUrl) {

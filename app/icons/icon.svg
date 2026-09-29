@@ -1,7 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <rect width="512" height="512" rx="112" fill="#1f4d3a"/>
-  <path d="M60 380 L190 200 L260 290 L330 170 L452 380 Z" fill="#5cc08f"/>
-  <path d="M60 380 L190 200 L230 252 L170 380 Z" fill="#3e9a6d"/>
-  <path d="M96 420 C 200 360, 310 460, 420 400" stroke="#f0a04b" stroke-width="22" fill="none" stroke-linecap="round"/>
-  <circle cx="330" cy="120" r="44" fill="#f0a04b"/>
+  <circle cx="380" cy="128" r="42" fill="#f0a04b"/>
+  <path d="M56 430 C 170 395, 330 460, 456 418" stroke="#f0a04b" stroke-width="20" fill="none" stroke-linecap="round" opacity="0.9"/>
+  <!-- stacked stones, largest at the base -->
+  <ellipse cx="248" cy="382" rx="128" ry="38" fill="#5cc08f"/>
+  <ellipse cx="256" cy="306" rx="98" ry="34" fill="#8fd6ae"/>
+  <ellipse cx="244" cy="238" rx="72" ry="29" fill="#5cc08f"/>
+  <ellipse cx="258" cy="180" rx="48" ry="23" fill="#8fd6ae"/>
+  <ellipse cx="250" cy="134" rx="28" ry="17" fill="#5cc08f"/>
 </svg>

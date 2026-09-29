@@ -1,6 +1,6 @@
 {
-  "name": "Trailside Tour Guide",
-  "short_name": "Trailside",
+  "name": "Cairn Trail Guide",
+  "short_name": "Cairn",
   "description": "GPS audio tour guide that narrates stories about the places you drive past, even with no signal.",
   "start_url": "./",
   "scope": "./",

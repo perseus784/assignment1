@@ -1,8 +1,8 @@
 // Service worker: makes the app open with no connection, serves downloaded tours
 // (manifest + audio + optional offline map) from the cache, and caches map tiles you've seen.
 
-const SHELL_CACHE = 'shell-v3';
-const TOUR_CACHE = 'trailside-tours-v2'; // written by js/packs.js
+const SHELL_CACHE = 'shell-v4';
+const TOUR_CACHE = 'cairn-tours-v1'; // written by js/packs.js
 const TILE_CACHE = 'map-tiles-v1';
 const TILE_HOSTS = ['tiles.openfreemap.org'];
 const MAX_TILES = 3000;

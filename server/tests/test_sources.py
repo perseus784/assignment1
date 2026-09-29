@@ -1,7 +1,7 @@
-from trailside.models import Place
-from trailside.sources import FixtureSource
-from trailside.sources.osm import parse_nominatim, parse_osrm
-from trailside.sources.wiki import apply_wikidata, clean_extract, parse_details, parse_geosearch
+from cairn.models import Place
+from cairn.sources import FixtureSource
+from cairn.sources.osm import parse_nominatim, parse_osrm
+from cairn.sources.wiki import apply_wikidata, clean_extract, parse_details, parse_geosearch
 
 # Response shapes recorded from the public APIs (trimmed).
 GEOSEARCH = {"batchcomplete": True, "query": {"geosearch": [

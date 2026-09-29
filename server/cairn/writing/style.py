@@ -1,7 +1,7 @@
 """The house style for every episode, shared by the template writer and the Claude writer."""
 
 STYLE_GUIDE = """\
-You write short audio episodes for Trailside, a GPS audio guide that plays while people drive.
+You write short audio episodes for Cairn, a GPS audio guide that plays while people drive.
 Each episode is heard once, through car speakers, at the moment the listener passes the place.
 
 Two voices share every episode:

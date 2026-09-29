@@ -4,10 +4,10 @@ import time
 import pytest
 from fastapi.testclient import TestClient
 
-from trailside.api import create_app
-from trailside.models import TourRequest
-from trailside.pipeline import FORMAT, build_tour
-from trailside.writing.writer import TemplateWriter
+from cairn.api import create_app
+from cairn.models import TourRequest
+from cairn.pipeline import FORMAT, build_tour
+from cairn.writing.writer import TemplateWriter
 
 
 @pytest.fixture(scope="module")
@@ -84,7 +84,7 @@ def test_api_unknown_place(tmp_path):
 
 def test_every_trigger_is_reachable_from_the_road(skyway):
     """A car following the route must pass inside every stop's geofence."""
-    from trailside.geo import project_onto_polyline
+    from cairn.geo import project_onto_polyline
 
     route = [tuple(p) for p in skyway.manifest["route"]]
     for s in skyway.manifest["stops"]:

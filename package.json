@@ -1,11 +1,11 @@
 {
-  "name": "trailside-tour-guide",
+  "name": "cairn",
   "version": "0.2.0",
   "private": true,
-  "description": "Trailside: GPS audio tour engine + offline-first player app",
+  "description": "Cairn: GPS audio tour engine + offline-first player app",
   "type": "module",
   "scripts": {
-    "start": "cd server && ../.venv/bin/python -m trailside serve --port 8000",
+    "start": "cd server && ../.venv/bin/python -m cairn serve --port 8000",
     "test": "node --test app/tests/*.test.js && .venv/bin/python -m pytest -q server/tests"
   }
 }

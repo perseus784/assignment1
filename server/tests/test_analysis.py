@@ -1,12 +1,12 @@
 import itertools
 
-from trailside.analysis.classify import classify, era, is_low_value
-from trailside.analysis.facts import pick_facts, split_sentences
-from trailside.analysis.plan import (RoutePlacement, fit_radii, order_stops, select_in_area, slide_in,
+from cairn.analysis.classify import classify, era, is_low_value
+from cairn.analysis.facts import pick_facts, split_sentences
+from cairn.analysis.plan import (RoutePlacement, fit_radii, order_stops, select_in_area, slide_in,
                                      weighted_interval_schedule)
-from trailside.analysis.rank import dedupe, score
-from trailside.geo import destination, haversine
-from trailside.models import Place
+from cairn.analysis.rank import dedupe, score
+from cairn.geo import destination, haversine
+from cairn.models import Place
 
 O = (44.5, -110.8)
 

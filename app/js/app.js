@@ -448,8 +448,8 @@ function setMediaSession(item) {
   try {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: item.title,
-      artist: state.manifest?.name ?? 'Trailside',
-      album: 'Trailside',
+      artist: state.manifest?.name ?? 'Cairn',
+      album: 'Cairn',
       artwork: [{ src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' }],
     });
     navigator.mediaSession.setActionHandler('nexttrack', skip);

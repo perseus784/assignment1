@@ -1,4 +1,4 @@
-# Trailside Tour Format (`trailside.tour/2`)
+# Cairn Tour Format (`cairn.tour/2`)
 
 The contract between the **engine** (which researches, writes, and produces tours) and the
 **app** (which only downloads and plays them). A tour is a directory:
@@ -18,7 +18,7 @@ All paths in the manifest are relative to `manifest.json`. The app caches every 
 
 ```jsonc
 {
-  "format": "trailside.tour/2",
+  "format": "cairn.tour/2",
   "id": "million-dollar-highway",
   "version": 1,
   "name": "Million Dollar Highway",
@@ -26,7 +26,7 @@ All paths in the manifest are relative to `manifest.json`. The app caches every 
   "description": "10 stories across 26 km of road, including …",
   "language": "en",
   "generatedAt": "2026-09-29T16:18:30Z",
-  "generator": { "engine": "trailside-engine/0.2", "writer": "template|claude", "tts": "device|kokoro", "source": "live|fixture:…" },
+  "generator": { "engine": "cairn-engine/0.2", "writer": "template|claude", "tts": "device|kokoro", "source": "live|fixture:…" },
 
   "center": [37.94, -107.67],
   "bounds": { "south": 37.78, "west": -107.75, "north": 38.06, "east": -107.63 },

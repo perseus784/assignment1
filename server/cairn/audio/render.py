@@ -84,7 +84,7 @@ class KokoroTTS:
     """Kokoro-82M (Apache-2.0) via the `kokoro-onnx` package.
 
     Setup: `pip install kokoro-onnx`, download kokoro-v1.0.onnx and voices-v1.0.bin from the
-    official kokoro-onnx release, then set TRAILSIDE_KOKORO_MODEL / TRAILSIDE_KOKORO_VOICES.
+    official kokoro-onnx release, then set CAIRN_KOKORO_MODEL / CAIRN_KOKORO_VOICES.
     """
 
     name = "kokoro"

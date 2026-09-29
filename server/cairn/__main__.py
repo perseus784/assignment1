@@ -1,10 +1,10 @@
 """Command line: build tours, render the sound library, or run the server.
 
-    python -m trailside build --query "Zion National Park"
-    python -m trailside build --source fixture:yellowstone --query yellowstone \\
+    python -m cairn build --query "Zion National Park"
+    python -m cairn build --source fixture:yellowstone --query yellowstone \\
         --editorial yellowstone-geyser-country --out ../app/packs --id yellowstone-geyser-country
-    python -m trailside sounds --out /tmp/sounds
-    python -m trailside serve --port 8000
+    python -m cairn sounds --out /tmp/sounds
+    python -m cairn serve --port 8000
 """
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ from pathlib import Path
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(prog="trailside")
+    parser = argparse.ArgumentParser(prog="cairn")
     sub = parser.add_subparsers(dest="cmd", required=True)
 
     b = sub.add_parser("build", help="build a tour pack")
@@ -78,7 +78,7 @@ def main() -> None:
     elif args.cmd == "serve":
         import uvicorn
 
-        uvicorn.run("trailside.api:app", host=args.host, port=args.port)
+        uvicorn.run("cairn.api:app", host=args.host, port=args.port)
 
 
 if __name__ == "__main__":

@@ -3,9 +3,9 @@ from types import SimpleNamespace
 
 import pytest
 
-from trailside.analysis.classify import classify
-from trailside.models import Place, Stop
-from trailside.writing.writer import ClaudeWriter, Editorial, TemplateWriter, spoken_name, validate_segments
+from cairn.analysis.classify import classify
+from cairn.models import Place, Stop
+from cairn.writing.writer import ClaudeWriter, Editorial, TemplateWriter, spoken_name, validate_segments
 
 PLACE = Place(id="t:ym", name="Yankee Girl Mine", lat=37.93, lon=-107.70, types=["mine"], sitelinks=3,
               extract=("The Yankee Girl Mine was one of the richest silver mines of the Red Mountain mining district. "

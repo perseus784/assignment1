@@ -1,6 +1,6 @@
 import math
 
-from trailside.geo import (angle_diff, bearing, corridor_cover, decode_polyline, destination, haversine, hex_cover,
+from cairn.geo import (angle_diff, bearing, corridor_cover, decode_polyline, destination, haversine, hex_cover,
                            polyline_length, project_onto_polyline, simplify)
 
 O = (44.5, -110.8)
