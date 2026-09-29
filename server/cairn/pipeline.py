@@ -19,6 +19,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable, Optional
 
+from . import cells
 from .analysis import plan
 from .analysis.classify import classify
 from .analysis.rank import dedupe, score
@@ -48,10 +49,40 @@ def slugify(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")[:48] or "tour"
 
 
+def _endpoint(value, source: Source, label: str) -> tuple[tuple, str, str]:
+    """A route end: a place name to geocode, or [lat, lon]."""
+    if isinstance(value, str):
+        hit = source.geocode(value)
+        if not hit:
+            raise LookupError(f"Couldn't find the {label} “{value}”")
+        region = hit.get("region") or ", ".join(hit.get("display_name", "").split(", ")[-2:][:2])
+        return tuple(hit["center"]), hit["name"], region
+    lat, lon = value
+    return (float(lat), float(lon)), "your location" if label == "start" else "your destination", ""
+
+
 def discover(req: TourRequest, source: Source, progress: Progress) -> tuple[list[Place], Optional[list], str, Optional[tuple]]:
     name = req.name
     center = req.center
     radius = req.radius_m
+    if req.cell:
+        progress(0.1, "Gathering places, history and geography")
+        center = cells.center(req.cell)
+        places = [p for p in source.places_near(center, cells.search_radius(req.cell)) if cells.contains(req.cell, p.latlon)]
+        return places, None, name or "Around here", center
+    if req.origin is not None and req.destination is not None and not req.route:
+        progress(0.04, "Planning the drive")
+        start, start_name, _ = _endpoint(req.origin, source, "start")
+        end, end_name, region = _endpoint(req.destination, source, "destination")
+        details = source.route_details([start, end])
+        if not details:
+            raise LookupError(f"Couldn't find a driving route from {start_name} to {end_name}")
+        req.route = [tuple(p) for p in details["points"]]
+        if details.get("distance") and details.get("duration"):
+            # Pace the stories for the real road: city streets vs. open highway.
+            req.travel_speed_mps = min(33.0, max(8.0, details["distance"] / details["duration"]))
+        name = name or f"{start_name} to {end_name}"
+        req.region_hint = region  # type: ignore[attr-defined]
     if req.query and not (center or req.route):
         progress(0.05, f"Finding “{req.query}”")
         hit = source.geocode(req.query)
@@ -85,6 +116,8 @@ def analyse(places: list[Place], progress: Progress) -> list[Place]:
 
 def make_stops(places: list[Place], route: Optional[list], req: TourRequest, center, source: Source, progress: Progress) -> tuple[list[Stop], Optional[list]]:
     progress(0.35, "Planning the route and story timing")
+    if req.cell:  # the road isn't known for a map cell: announce places as the driver passes
+        return plan.build_stops_area(plan.order_stops(plan.select_in_area(places, req.max_stops))), None
     if route:
         chosen = plan.select_along_route(places, route, req.max_stops, req.travel_speed_mps)
         return plan.build_stops_route(chosen, req.travel_speed_mps), route
@@ -175,7 +208,7 @@ def build_tour(req: TourRequest, out_dir: Optional[Path] = None, progress: Optio
 
     write_scripts(stops, writer, editorial, progress)
 
-    tour_id = tour_id or f"{slugify(name)}-{req.cache_key()}"
+    tour_id = tour_id or (f"cell-{req.cell}-{req.cache_key()}" if req.cell else f"{slugify(name)}-{req.cache_key()}")
     out_dir = (out_dir or settings.tours_dir) / tour_id
     tmp = out_dir.with_name(out_dir.name + ".building")
     shutil.rmtree(tmp, ignore_errors=True)
@@ -184,21 +217,24 @@ def build_tour(req: TourRequest, out_dir: Optional[Path] = None, progress: Optio
     tts = get_tts()
     assets = AssetWriter(tmp)
     progress(0.72, "Designing sound and recording narration" if tts else "Designing sound")
-    intro = (editorial.intro() if editorial else None) or intro_script(name, stops)
+    if req.cell:
+        top = max(stops, key=lambda s: s.place.score)
+        name = req.name or f"Around {spoken_name(top.place.name)}"
+    intro = None if req.cell else (editorial.intro() if editorial else None) or intro_script(name, stops)
     manifest_stops = []
     for i, stop in enumerate(stops):
         progress(0.72 + 0.23 * i / len(stops), f"Producing “{stop.place.name}”")
         p = stop.place
         manifest_stops.append(
             {
-                "id": slugify(p.name) + f"-{i}",
+                "id": (f"{req.cell}-" if req.cell else "") + slugify(p.name) + f"-{i}",
                 "name": p.name,
                 "order": stop.order,
                 "category": p.category,
                 "themes": p.themes,
                 "summary": p.description,
                 "place": {"lat": round(p.lat, 6), "lon": round(p.lon, 6)},
-                "trigger": {"lat": round(stop.trigger[0], 6), "lon": round(stop.trigger[1], 6), "radius": stop.radius},
+                "trigger": {"lat": round(stop.trigger[0], 6), "lon": round(stop.trigger[1], 6), "radius": stop.radius, **({"reach": stop.reach} if stop.reach else {})},
                 "priority": stop.priority,
                 "side": stop.side,
                 "along": stop.along,
@@ -209,9 +245,9 @@ def build_tour(req: TourRequest, out_dir: Optional[Path] = None, progress: Optio
         )
     ambient = [{"id": aid, "title": s.title, "episode": episode(s, f"amb-{aid}", assets, tts)} for aid, s in (editorial.ambient() if editorial else [])]
     pts_for_map = [s.trigger for s in stops] + (list(route) if route else [])
-    basemap = offline_basemap(bbox(pts_for_map, pad_m=5000), tmp, assets, progress)
-    intro_ep = episode(intro, "intro", assets, tts)
-    outro_rel, _ = assets.sound("outro")
+    basemap = None if req.cell else offline_basemap(bbox(pts_for_map, pad_m=5000), tmp, assets, progress)
+    intro_ep = episode(intro, "intro", assets, tts) if intro else None
+    outro_rel = None if req.cell else assets.sound("outro")[0]
 
     pts = [s.trigger for s in stops] + [s.place.latlon for s in stops] + (list(route) if route else [])
     route_out = [[round(a, 5), round(b, 5)] for a, b in simplify(route, 15)] if route else None
@@ -240,8 +276,11 @@ def build_tour(req: TourRequest, out_dir: Optional[Path] = None, progress: Optio
             "narrator": {"style": "calm documentary narrator", "device": {"pitch": 0.92, "rate": 0.97}},
             "storyteller": {"style": "warm storyteller", "device": {"pitch": 1.05, "rate": 1.0}},
         },
-        "intro": {"id": "intro", **intro_ep},
-        "outro": {"audio": outro_rel},
+        "kind": "cell" if req.cell else "tour",
+        "cell": req.cell,
+        "travelSpeedMps": round(req.travel_speed_mps, 1),
+        "intro": {"id": "intro", **intro_ep} if intro_ep else None,
+        "outro": {"audio": outro_rel} if outro_rel else None,
         "stops": manifest_stops,
         "ambient": ambient,
         "attribution": attribution(stops, source),

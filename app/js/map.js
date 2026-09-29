@@ -94,8 +94,10 @@ export class TourMap {
   drawOverlays() {
     const m = this.manifest;
     if (!m || !this.map) return;
-    const route = m.route?.length ? m.route.map(([lat, lon]) => [lon, lat]) : m.stops.map((s) => [s.place.lon, s.place.lat]);
-    const data = { type: 'Feature', geometry: { type: 'LineString', coordinates: route } };
+    const route = m.route?.length ? m.route.map(([lat, lon]) => [lon, lat]) : m.free ? [] : m.stops.map((s) => [s.place.lon, s.place.lat]);
+    const data = route.length > 1
+      ? { type: 'Feature', geometry: { type: 'LineString', coordinates: route } }
+      : { type: 'FeatureCollection', features: [] };
     if (this.map.getSource('route')) {
       this.map.getSource('route').setData(data);
     } else {
@@ -105,15 +107,33 @@ export class TourMap {
     }
     for (const mk of this.markers.values()) mk.remove();
     this.markers.clear();
-    m.stops.forEach((s, i) => {
-      const el = document.createElement('button');
-      el.className = 'stop-marker';
-      el.textContent = String(i + 1);
-      el.title = s.name;
-      el.setAttribute('aria-label', `Stop ${i + 1}: ${s.name}`);
-      el.addEventListener('click', (e) => { e.stopPropagation(); this.onStopClick(s); });
-      this.markers.set(s.id, new maplibregl.Marker({ element: el }).setLngLat([s.place.lon, s.place.lat]).addTo(this.map));
-    });
+    m.stops.forEach((s, i) => this.addMarker(s, i));
+  }
+
+  addMarker(s, i) {
+    const el = document.createElement('button');
+    el.className = this.manifest.free ? 'stop-marker free' : 'stop-marker';
+    el.textContent = this.manifest.free ? '' : String(i + 1);
+    el.title = s.name;
+    el.setAttribute('aria-label', this.manifest.free ? s.name : `Stop ${i + 1}: ${s.name}`);
+    el.addEventListener('click', (e) => { e.stopPropagation(); this.onStopClick(s); });
+    this.markers.set(s.id, new maplibregl.Marker({ element: el }).setLngLat([s.place.lon, s.place.lat]).addTo(this.map));
+  }
+
+  /** "Just drive" mode: an open-ended map around the driver that gains stops as cells arrive. */
+  async showFree(center) {
+    const d = 0.08;
+    await this.show({ free: true, route: null, stops: [], bounds: { south: center.lat - d, north: center.lat + d, west: center.lon - d, east: center.lon + d } }, (p) => p);
+    this.follow = true;
+  }
+
+  addStops(stops) {
+    if (!this.manifest?.free || !this.map) return;
+    for (const s of stops) {
+      if (this.markers.has(s.id)) continue;
+      this.manifest.stops.push(s);
+      this.addMarker(s, this.manifest.stops.length - 1);
+    }
   }
 
   setPlayed(played, currentId) {

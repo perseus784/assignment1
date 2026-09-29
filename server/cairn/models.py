@@ -51,6 +51,11 @@ class TourRequest:
     travel_speed_mps: float = 15.0  # typical driving speed, drives spacing between stories
     editorial: Optional[str] = None  # id of hand-curated scripts to prefer
     source: Optional[str] = None  # force a source (e.g. "fixture:yellowstone") for demos/tests
+    # A drive from A to B: place names or (lat, lon). The engine routes it on real roads.
+    origin: Optional[object] = None
+    destination: Optional[object] = None
+    # A map cell for "just drive" mode (see cells.py); stories for one grid square.
+    cell: Optional[str] = None
 
     def cache_key(self) -> str:
         import hashlib
@@ -65,8 +70,20 @@ class TourRequest:
             "l": self.language,
             "e": self.editorial,
             "s": self.source,
+            "o": _endpoint_key(self.origin),
+            "d": _endpoint_key(self.destination),
+            "cell": self.cell,
+            "v": self.travel_speed_mps if self.route else None,
         }
         return hashlib.sha1(json.dumps(payload, sort_keys=True).encode()).hexdigest()[:12]
+
+
+def _endpoint_key(v):
+    if v is None:
+        return None
+    if isinstance(v, str):
+        return v.strip().lower()
+    return [round(float(x), 3) for x in v]
 
 
 SegmentType = Literal["bed", "sfx", "say", "pause", "music"]
@@ -139,4 +156,5 @@ class Stop:
     priority: int
     side: Optional[str] = None  # left/right of the road, when a route is known
     along: Optional[float] = None  # meters along the route
+    reach: Optional[float] = None  # how far from the road it can be seen/announced (area & cell tours)
     script: Optional[Script] = None

@@ -76,7 +76,8 @@ export class TourEngine {
 
       const inside = d <= poi.radius;
       const approaching = moving && d <= poi.radius + lead && angleDiff(fix.heading, brg) <= opts.coneDegrees;
-      if (inside || approaching) triggered.push({ ...poi, distance: d, priority: poi.priority ?? 1 });
+      const passing = moving && poi.reach > 0 && isPassing(d, angleDiff(fix.heading, brg), poi.radius + lead, poi.reach);
+      if (inside || approaching || passing) triggered.push({ ...poi, distance: d, priority: poi.priority ?? 1 });
     }
 
     triggered.sort((a, b) => (b.priority - a.priority) || ((a.distance ?? 0) - (b.distance ?? 0)));
@@ -105,6 +106,12 @@ export class TourEngine {
     };
   }
 
+  /** Add places while driving (e.g. the next map cell arrived). Ignores ids already known. */
+  addPois(pois) {
+    const known = new Set(this.pack.pois.map((p) => p.id));
+    for (const p of pois) if (!known.has(p.id)) this.pack.pois.push(p);
+  }
+
   nextAmbient() {
     const list = this.pack.ambient;
     for (let i = 0; i < list.length; i++) {
@@ -131,4 +138,16 @@ export function enrichFix(fix, prev) {
   if ((out.heading == null || Number.isNaN(out.heading)) && d >= 5) out.heading = bearing(prev, fix);
   if ((out.heading == null || Number.isNaN(out.heading)) && prev.heading != null) out.heading = prev.heading;
   return out;
+}
+
+/**
+ * When the road isn't known, a place with a `reach` (how far off the road it can be seen) is
+ * announced as the driver heads past it: it's ahead of us, within `aheadMax` meters along our
+ * direction of travel, and our path will pass within `reach` of it.
+ */
+export function isPassing(distance, angleOffHeading, aheadMax, reach) {
+  const rad = (angleOffHeading * Math.PI) / 180;
+  const along = distance * Math.cos(rad);
+  const cross = Math.abs(distance * Math.sin(rad));
+  return along >= 0 && along <= aheadMax && cross <= reach;
 }

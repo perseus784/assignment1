@@ -17,6 +17,7 @@ export function toEnginePack(manifest) {
       lon: s.trigger.lon,
       radius: s.trigger.radius,
       priority: s.priority ?? 1,
+      reach: s.trigger.reach ?? 0,
       story: s.episode.transcript ?? '',
     })),
     ambient: (manifest.ambient ?? []).map((a) => ({ id: a.id, title: a.title, story: a.episode.transcript ?? '' })),
@@ -25,7 +26,7 @@ export function toEnginePack(manifest) {
 
 /** Episode for an id the engine triggered ('__intro', a stop id or an ambient id). */
 export function episodeFor(manifest, id) {
-  if (id === '__intro') return { id, title: manifest.intro.title, kind: 'intro', episode: manifest.intro };
+  if (id === '__intro') return manifest.intro ? { id, title: manifest.intro.title, kind: 'intro', episode: manifest.intro } : null;
   const stop = manifest.stops.find((s) => s.id === id);
   if (stop) return { id, title: stop.name, kind: 'stop', stop, episode: stop.episode };
   const amb = (manifest.ambient ?? []).find((a) => a.id === id);

@@ -258,5 +258,16 @@
       "sitelinks": 1,
       "extract": "Ouray Hot Springs is a public pool fed by natural hot springs at the north end of town. The Ute people used the springs long before miners arrived."
     }
-  ]
+  ],
+  "gazetteer": {
+    "silverton": [
+      37.8121,
+      -107.6628
+    ],
+    "ouray": [
+      38.0228,
+      -107.6714
+    ]
+  },
+  "speed_mps": 13.0
 }

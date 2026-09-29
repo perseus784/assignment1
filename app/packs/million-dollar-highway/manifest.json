@@ -7,7 +7,7 @@
  "description": "10 stories across 26 km of road, including Silverton, Ouray and Durango and Silverton Narrow Gauge Railroad.",
  "note": null,
  "language": "en",
- "generatedAt": "2026-09-29T17:05:30Z",
+ "generatedAt": "2026-09-29T17:40:24Z",
  "generator": {
   "engine": "cairn-engine/0.2",
   "writer": "template",
@@ -116,6 +116,9 @@
    }
   }
  },
+ "kind": "tour",
+ "cell": null,
+ "travelSpeedMps": 15.0,
  "intro": {
   "id": "intro",
   "title": "Welcome to Million Dollar Highway",

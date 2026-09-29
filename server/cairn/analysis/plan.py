@@ -230,11 +230,19 @@ def build_stops_route(chosen: list[RoutePlacement], speed_mps: float) -> list[St
     ]
 
 
+MAX_REACH_M = 3_000
+
+
 def build_stops_area(ordered: list[Place]) -> list[Stop]:
+    """Stops when we don't know the road. Each gets a `reach`: the app announces it when the
+    driver is heading past within that distance, not only when entering the geofence."""
     triggers = [p.latlon for p in ordered]
     radii = fit_radii(triggers, [BASE_RADIUS_M.get(p.category, 300) for p in ordered])
     prio = priorities(ordered)
-    return [Stop(place=p, order=i, trigger=p.latlon, radius=r, priority=pr) for i, (p, r, pr) in enumerate(zip(ordered, radii, prio))]
+    return [
+        Stop(place=p, order=i, trigger=p.latlon, radius=r, priority=pr, reach=round(min(visibility(p), MAX_REACH_M)))
+        for i, (p, r, pr) in enumerate(zip(ordered, radii, prio))
+    ]
 
 
 def centroid(points: Sequence[LatLon]) -> LatLon:

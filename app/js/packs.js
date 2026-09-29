@@ -69,7 +69,7 @@ export async function isDownloaded(entry) {
 }
 
 /** Download a pack and all of its audio. Reports progress as bytes. */
-export async function downloadPack(entry, onProgress = () => {}) {
+export async function downloadPack(entry, onProgress = () => {}, { remember = true } = {}) {
   const href = manifestUrl(entry);
   const manifestRes = await fetch(href, { cache: 'reload' });
   if (!manifestRes.ok) throw new Error(`Couldn't download the tour (${manifestRes.status})`);
@@ -96,7 +96,7 @@ export async function downloadPack(entry, onProgress = () => {}) {
   };
   await Promise.all([worker(), worker(), worker(), worker()]);
   if (cache) await cache.put(href, manifestRes);
-  saveEntry(entry, true);
+  if (remember) saveEntry(entry, true);
   return manifest;
 }
 

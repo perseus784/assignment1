@@ -1,6 +1,8 @@
 """Command line: build tours, render the sound library, or run the server.
 
     python -m cairn build --query "Zion National Park"
+    python -m cairn build --from "Dallas, TX" --to "Denton, TX"
+    python -m cairn build --cell 330_-970
     python -m cairn build --source fixture:yellowstone --query yellowstone \\
         --editorial yellowstone-geyser-country --out ../app/packs --id yellowstone-geyser-country
     python -m cairn sounds --out /tmp/sounds
@@ -14,6 +16,19 @@ import logging
 from pathlib import Path
 
 
+def _endpoint(value):
+    """'Dallas, TX' stays a name; '32.78,-96.80' becomes coordinates."""
+    if value is None:
+        return None
+    parts = value.split(",")
+    try:
+        if len(parts) == 2:
+            return (float(parts[0]), float(parts[1]))
+    except ValueError:
+        pass
+    return value
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(prog="cairn")
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -23,6 +38,9 @@ def main() -> None:
     b.add_argument("--center", help="lat,lon")
     b.add_argument("--radius", type=float, default=15_000, help="meters")
     b.add_argument("--route", type=Path, help="JSON file with [[lat, lon], ...]")
+    b.add_argument("--from", dest="origin", help="start of a drive: place name or lat,lon")
+    b.add_argument("--to", dest="destination", help="end of a drive: place name or lat,lon")
+    b.add_argument("--cell", help="build the 'just drive' pack for one map cell, e.g. 330_-970")
     b.add_argument("--name")
     b.add_argument("--max-stops", type=int, default=14)
     b.add_argument("--source", help="fixture:<name> for demo data")
@@ -56,6 +74,9 @@ def main() -> None:
             max_stops=args.max_stops,
             source=args.source,
             editorial=args.editorial,
+            origin=_endpoint(args.origin),
+            destination=_endpoint(args.destination),
+            cell=args.cell,
         )
         result = build_tour(req, out_dir=args.out, writer=get_writer(args.writer), tour_id=args.id)
         print(json.dumps({"tour": result.tour_id, "path": str(result.path), **result.stats, "bytes": result.manifest["totalBytes"]}, indent=2))

@@ -303,5 +303,20 @@
       "sitelinks": 7,
       "extract": "Isa Lake is a small lily-covered lake at Craig Pass on the Continental Divide that drains to both the Atlantic and Pacific oceans. Because the Divide loops around the pass, water leaving the lake's east side reaches the Pacific, while water leaving its west side reaches the Atlantic by way of the Missouri and Mississippi rivers."
     }
-  ]
+  ],
+  "gazetteer": {
+    "madison junction": [
+      44.6453,
+      -110.8607
+    ],
+    "old faithful": [
+      44.46,
+      -110.838
+    ],
+    "west thumb": [
+      44.4182,
+      -110.5738
+    ]
+  },
+  "speed_mps": 16.0
 }

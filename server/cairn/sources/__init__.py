@@ -17,6 +17,7 @@ class Source(Protocol):
     def places_along(self, route: list[LatLon], corridor_m: float) -> list[Place]: ...
     def geocode(self, query: str) -> Optional[dict]: ...
     def route(self, waypoints: list[LatLon]) -> Optional[list[LatLon]]: ...
+    def route_details(self, waypoints: list[LatLon]) -> Optional[dict]: ...
 
 
 class LiveSource:
@@ -42,8 +43,12 @@ class LiveSource:
         return self.geocoder.geocode(query)
 
     def route(self, waypoints):
+        details = self.route_details(waypoints)
+        return details["points"] if details else None
+
+    def route_details(self, waypoints):
         try:
-            return self.router.route(waypoints)
+            return self.router.route_details(waypoints)
         except Exception:  # routing is a nice-to-have; fall back to straight lines
             return None
 
@@ -70,14 +75,30 @@ class FixtureSource:
         return [p for p in self._copy() if project_onto_polyline(p.latlon, route)["offset"] <= corridor_m]
 
     def geocode(self, query):
+        q = query.strip().lower()
         g = self.data.get("geocode")
-        if g and query.strip().lower() in [a.lower() for a in g.get("aliases", [])] + [g["name"].lower()]:
+        if g and q in [a.lower() for a in g.get("aliases", [])] + [g["name"].lower()]:
             return {**g, "center": tuple(g["center"])}
+        # Small gazetteer of towns in the fixture, so "from A to B" works offline.
+        for name, (lat, lon) in self.data.get("gazetteer", {}).items():
+            if q == name.lower() or q.split(",")[0].strip() == name.lower():
+                return {"name": name.title(), "center": (lat, lon), "region": g.get("region", "") if g else ""}
         return None
 
     def route(self, waypoints):
+        details = self.route_details(waypoints)
+        return details["points"] if details else None
+
+    def route_details(self, waypoints):
         r = self.data.get("route")
-        return [tuple(p) for p in r] if r else None
+        if not r:
+            return None
+        points = [tuple(p) for p in r]
+        from ..geo import polyline_length
+
+        length = polyline_length(points)
+        speed = self.data.get("speed_mps", 15.0)
+        return {"points": points, "distance": length, "duration": length / speed}
 
     def _copy(self) -> list[Place]:
         return [Place(**{k: v for k, v in p.__dict__.items()}) for p in self.places]
@@ -101,9 +122,13 @@ class AllFixturesSource:
         return next((hit for s in self.sources if (hit := s.geocode(query))), None)
 
     def route(self, waypoints):
+        details = self.route_details(waypoints)
+        return details["points"] if details else None
+
+    def route_details(self, waypoints):
         # Use the road of whichever fixture the tour is in.
         best = min(self.sources, key=lambda s: min((haversine(waypoints[0], p.latlon) for p in s.places), default=float("inf")))
-        return best.route(waypoints)
+        return best.route_details(waypoints)
 
 
 def get_source(name: Optional[str]) -> Source:

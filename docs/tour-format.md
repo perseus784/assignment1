@@ -27,6 +27,9 @@ All paths in the manifest are relative to `manifest.json`. The app caches every 
   "language": "en",
   "generatedAt": "2026-09-29T16:18:30Z",
   "generator": { "engine": "cairn-engine/0.2", "writer": "template|claude", "tts": "device|kokoro", "source": "live|fixture:…" },
+  "kind": "tour",                        // "tour", or "cell" for a "just drive" map-cell pack
+  "cell": null,                          // e.g. "330_-970" when kind is "cell"
+  "travelSpeedMps": 13.0,                // speed the stories were paced for
 
   "center": [37.94, -107.67],
   "bounds": { "south": 37.78, "west": -107.75, "north": 38.06, "east": -107.63 },
@@ -39,8 +42,8 @@ All paths in the manifest are relative to `manifest.json`. The app caches every 
     "storyteller": { "style": "warm storyteller",          "device": { "pitch": 1.05, "rate": 1.0 } }
   },
 
-  "intro":  { "id": "intro", …episode },   // plays when you enter `bounds`
-  "outro":  { "audio": "sounds/outro.mp3" },  // plays after the last stop
+  "intro":  { "id": "intro", …episode },   // plays when you enter `bounds` (null for cells)
+  "outro":  { "audio": "sounds/outro.mp3" },  // plays after the last stop (null for cells)
   "stops":  [ …stop ],
   "ambient": [ { "id": "fact-bison", "title": "…", "episode": { … } } ],  // fillers for quiet stretches
 
@@ -62,6 +65,7 @@ All paths in the manifest are relative to `manifest.json`. The app caches every 
   "summary": "historic silver mine in the Red Mountain mining district",
   "place":   { "lat": 37.929, "lon": -107.699 },            // the thing itself (map pin, navigation)
   "trigger": { "lat": 37.9288, "lon": -107.6962, "radius": 300 },   // geofence on the road
+  // Cells and area tours add "reach": 2500, i.e. how far off the driver's path it can be announced
   "priority": 2,                            // 1–3; higher plays first when several trigger together
   "side": "left",                           // left/right of the road when known
   "along": 14535,                           // meters from the route start
@@ -71,7 +75,9 @@ All paths in the manifest are relative to `manifest.json`. The app caches every 
 ```
 
 The app starts a stop's episode when the device enters its `trigger` circle, or earlier when
-moving towards it (look-ahead = speed × a few seconds). Each stop plays once per trip.
+moving towards it (look-ahead = speed × a few seconds). If the trigger has a `reach`, it also
+starts when the place is ahead and the driver's path will pass within `reach` meters of it.
+Each stop plays once per trip. In "just drive" mode, stops are remembered across drives.
 
 ### episode
 

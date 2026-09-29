@@ -5,6 +5,7 @@ import { EngineClient } from './api.js';
 import { loadCatalog, loadManifest, downloadPack, removePack, assetUrl } from './packs.js';
 import { toEnginePack, episodeFor, nextStop, navigationUrl, CATEGORY_LABEL, formatBytes } from './tour.js';
 import { distance, formatDistance } from './geo.js';
+import { DriveMode } from './drive.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -48,6 +49,9 @@ const state = {
   engineClient: null,
   health: null,
   map: null,
+  mode: 'tour', // 'tour' (a chosen tour) or 'drive' ("just drive": stories wherever you go)
+  drive: null,
+  stopIndex: new Map(), // drive mode: stop id -> { stop, href }
 };
 
 const player = new EpisodePlayer({
@@ -80,7 +84,7 @@ async function selectTour(id) {
   }
 }
 
-async function showMap() {
+async function showMap(createOnly = false) {
   if (!state.map) {
     try {
       const { TourMap } = await import('./map.js');
@@ -91,12 +95,16 @@ async function showMap() {
       return;
     }
   }
+  if (createOnly || !state.manifest) return;
+  state.mapFree = false;
   await state.map.show(state.manifest, (p) => assetUrl(state.href, p)).catch((err) => console.warn(err));
 }
 
 function startTour() {
   if (!state.manifest) return setStatus('Pick a tour first', 'error');
   player.unlock(); // must happen inside the tap handler
+  state.mode = 'tour';
+  if (state.mapFree) showMap(); // coming back from "just drive": show this tour's map again
 
   // Simulated drives start fresh and never touch the real trip's history.
   const played = settings.simulate ? [] : store.get(playedKey(), []);
@@ -124,7 +132,57 @@ function startTour() {
   renderIdle();
 }
 
+/** "Just drive": no tour needed. Stories for the road ahead are fetched as you go. */
+async function startDrive() {
+  player.unlock();
+  if (state.running) stopTour();
+  state.mode = 'drive';
+  state.mapFree = false; // the free map is shown on the first GPS fix
+  state.stopIndex = new Map();
+  // Remembered across drives, so your daily commute doesn't repeat itself.
+  const played = settings.simulate ? [] : store.get('played:drive', []);
+  state.engine = new TourEngine({ id: 'drive', name: 'Just drive', bounds: null, intro: null, pois: [], ambient: [] }, { leadSeconds: settings.lead }, played);
+  state.queue = [];
+  state.running = true;
+  state.drive = new DriveMode({
+    engineBase: state.engineClient?.base ?? null,
+    source: settings.demo ? 'fixtures' : undefined,
+    onCell: (manifest, href) => addCell(manifest, href),
+    onChange: () => renderDriveStatus(),
+  });
+
+  // Simulation drives the selected tour's road, which is handy for trying it at home.
+  const route = settings.simulate ? state.manifest?.route?.map(([lat, lon]) => ({ lat, lon })) : null;
+  if (route?.length) {
+    state.source = new SimulatedSource(route, handleFix, { timeScale: Number(settings.simSpeed), onEnd: () => setStatus('Simulated drive finished', 'idle') });
+  } else {
+    state.source = new GpsSource(handleFix, (err) => setStatus(gpsErrorMessage(err), 'error'));
+  }
+  setStatus(route?.length ? 'Simulating a free drive…' : 'Waiting for GPS…', 'live');
+  state.source.start();
+  requestWakeLock();
+  $('btn-recenter').hidden = false;
+  renderIdle();
+  renderUpcoming();
+}
+
+function addCell(manifest, href) {
+  const pack = toEnginePack(manifest);
+  for (const s of manifest.stops) state.stopIndex.set(s.id, { stop: s, href });
+  state.engine?.addPois(pack.pois);
+  state.map?.addStops(manifest.stops);
+  renderUpcoming();
+}
+
+function renderDriveStatus() {
+  if (state.mode !== 'drive' || !state.drive || !(state.source instanceof GpsSource) || !state.lastFix) return;
+  const { ready, loading } = state.drive.stats;
+  setStatus(`Just driving · ${state.stopIndex.size} places nearby${loading ? ' · fetching…' : ''}${!ready && !navigator.onLine ? ' · offline' : ''}`, 'live');
+}
+
 function stopTour() {
+  state.drive?.stop();
+  state.drive = null;
   state.source?.stop();
   state.source = null;
   state.running = false;
@@ -138,11 +196,21 @@ function stopTour() {
 
 function handleFix(fix) {
   state.lastFix = fix;
+  if (state.mode === 'drive') {
+    if (!state.mapFree) {
+      state.mapFree = true;
+      showFreeMap(fix);
+    }
+    state.drive?.update(fix);
+  }
   const result = state.engine.update(fix);
   for (const t of result.triggered) enqueue(t.id);
   if (result.triggered.length && state.source instanceof GpsSource) store.set(playedKey(), [...state.engine.played]);
 
-  if (state.source instanceof GpsSource) {
+  if (state.mode === 'drive') {
+    if (state.source instanceof GpsSource) renderDriveStatus();
+    else setStatus(`Free drive · ${state.stopIndex.size} places · ${Math.round(state.source.progress * 100)}%`, 'live');
+  } else if (state.source instanceof GpsSource) {
     const speed = fix.speed ?? 0;
     const v = settings.units === 'metric' ? `${Math.round(speed * 3.6)} km/h` : `${Math.round(speed * 2.237)} mph`;
     setStatus(result.insidePark ? `GPS live · ${v}` : `Outside tour area · ${v}`, 'live');
@@ -154,12 +222,27 @@ function handleFix(fix) {
   maybePlayOutro();
 }
 
-const playedKey = () => `played:${state.manifest?.id ?? state.selectedId}`;
+const playedKey = () => (state.mode === 'drive' ? 'played:drive' : `played:${state.manifest?.id ?? state.selectedId}`);
+
+async function showFreeMap(fix) {
+  if (!state.map) await showMap(true);
+  await state.map?.showFree(fix).catch((err) => console.warn(err));
+  for (const { stop } of state.stopIndex.values()) state.map?.addStops([stop]);
+}
 
 // ---------- Story queue ----------
 
-function enqueue(id) {
+function lookup(id) {
+  if (state.mode === 'drive') {
+    const hit = state.stopIndex.get(id);
+    return hit ? { id, title: hit.stop.name, kind: 'stop', stop: hit.stop, episode: hit.stop.episode, href: hit.href } : null;
+  }
   const item = episodeFor(state.manifest, id);
+  return item ? { ...item, href: state.href } : null;
+}
+
+function enqueue(id) {
+  const item = lookup(id);
   if (!item) return;
   if (state.current?.id === id || state.queue.some((q) => q.id === id)) return;
   // If you've already driven well past a place by the time its turn comes, skip it.
@@ -167,7 +250,7 @@ function enqueue(id) {
     item.kind !== 'stop' || !state.lastFix ||
     distance(state.lastFix, item.stop.trigger) <= item.stop.trigger.radius + 2000;
   state.queue.push(item);
-  player.preload(item.episode);
+  player.preload(item.episode, item.href);
   if (!state.current) playNext();
   else renderQueue();
 }
@@ -179,7 +262,7 @@ async function playNext() {
   renderNow();
   if (!item) return;
   setMediaSession(item);
-  await player.play(item.episode);
+  await player.play(item.episode, { base: item.href ?? state.href });
   if (state.current === item) state.current = null;
   if (state.running) setTimeout(playNext, 900);
   else renderIdle();
@@ -191,7 +274,7 @@ function skip() {
 
 function maybePlayOutro() {
   const m = state.manifest;
-  if (state.outroPlayed || !m?.outro?.audio || !state.engine) return;
+  if (state.mode === 'drive' || state.outroPlayed || !m?.outro?.audio || !state.engine) return;
   if (!m.stops.every((s) => state.engine.played.has(s.id)) || state.current || state.queue.length) return;
   state.outroPlayed = true;
   state.queue.push({
@@ -225,6 +308,11 @@ function renderNow() {
     const side = item.stop?.side ? ` · on your ${item.stop.side}` : '';
     $('now-eyebrow').textContent = `${player.muted ? 'Muted' : 'Now playing'}${cat ? ` · ${cat}` : ''}${side}`;
     $('now-title').textContent = item.title;
+  } else if (state.mode === 'drive' && state.running) {
+    $('now-eyebrow').textContent = 'Just driving';
+    $('now-title').textContent = 'Stories wherever you go';
+    renderLine(null);
+    $('now-text').textContent = 'No plan needed. Cairn fetches stories for the road ahead as you drive and plays them as you pass.';
   } else if (m) {
     $('now-eyebrow').textContent = state.running ? 'Listening for places' : `${m.stops.length} stories · ${m.region || 'Tour'}`;
     $('now-title').textContent = m.name;
@@ -240,9 +328,11 @@ function renderNow() {
 
 function renderStartButton() {
   const btn = $('btn-start');
-  btn.textContent = state.running ? 'Stop tour' : 'Start tour';
+  const driving = state.running && state.mode === 'drive';
+  btn.textContent = driving ? 'Stop driving' : state.running ? 'Stop tour' : 'Start tour';
   btn.classList.toggle('stop', state.running);
-  btn.disabled = !state.manifest;
+  btn.disabled = !state.manifest && !state.running;
+  $('btn-drive').hidden = state.running;
 }
 
 function renderLine(line) {
@@ -259,6 +349,7 @@ function renderQueue() {
 }
 
 function renderUpcoming() {
+  if (state.mode === 'drive' && state.running) return renderUpcomingDrive();
   const m = state.manifest;
   const list = $('upcoming');
   if (!m) return;
@@ -294,6 +385,43 @@ function renderUpcoming() {
     $('nav-next').href = navigationUrl(next.stop.place, settings.nav);
     $('nav-next').textContent = `Navigate to ${next.stop.name}`;
   }
+}
+
+/** Drive mode: the nearest places we know about that you haven't heard yet. */
+function renderUpcomingDrive() {
+  const list = $('upcoming');
+  const fix = state.lastFix;
+  const played = state.engine?.played ?? new Set();
+  $('nav-next').hidden = true;
+  const near = [...state.stopIndex.values()]
+    .map(({ stop }) => ({ stop, d: fix ? distance(fix, stop.place) : Infinity }))
+    .filter(({ stop }) => !played.has(stop.id))
+    .sort((a, b) => a.d - b.d)
+    .slice(0, 6);
+  if (!near.length) {
+    list.innerHTML = `<li class="empty">${fix ? 'Looking for stories along the road ahead…' : 'Waiting for your location…'}</li>`;
+    return;
+  }
+  list.replaceChildren(
+    ...near.map(({ stop, d }) => {
+      const li = document.createElement('li');
+      const num = document.createElement('span');
+      num.className = 'num dot';
+      const body = document.createElement('span');
+      const title = document.createElement('span');
+      title.className = 'title';
+      title.textContent = stop.name;
+      const meta = document.createElement('span');
+      meta.className = 'meta';
+      meta.textContent = [CATEGORY_LABEL[stop.category], stop.summary].filter(Boolean).join(' · ');
+      body.append(title, meta);
+      const dist = document.createElement('span');
+      dist.className = 'dist';
+      dist.textContent = Number.isFinite(d) ? formatDistance(d, settings.units) : '';
+      li.append(num, body, dist);
+      return li;
+    }),
+  );
 }
 
 function previewStop(stop) {
@@ -418,6 +546,7 @@ async function connectEngine() {
   }
   const ok = !!state.engineClient;
   $('search').querySelector('button').disabled = !ok;
+  $('plan').querySelector('button').disabled = !ok;
   $('btn-near').disabled = !ok;
   $('row-demo').hidden = !state.health?.fixtures?.length;
   $('engine-hint').textContent = ok
@@ -448,7 +577,7 @@ function setMediaSession(item) {
   try {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: item.title,
-      artist: state.manifest?.name ?? 'Cairn',
+      artist: state.mode === 'drive' ? 'Just drive' : state.manifest?.name ?? 'Cairn',
       album: 'Cairn',
       artwork: [{ src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' }],
     });
@@ -502,6 +631,22 @@ function bindSettings() {
 }
 
 $('btn-start').addEventListener('click', () => (state.running ? stopTour() : startTour()));
+$('btn-drive').addEventListener('click', startDrive);
+$('plan').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const to = $('plan-to').value.trim();
+  const from = $('plan-from').value.trim();
+  if (!to) return;
+  if (from) return createTour({ origin: from, destination: to });
+  // No start given: drive from where you are now.
+  $('build').hidden = false;
+  $('build-text').textContent = 'Finding your location…';
+  navigator.geolocation.getCurrentPosition(
+    (pos) => createTour({ origin: [pos.coords.latitude, pos.coords.longitude], destination: to }),
+    (err) => { $('build-text').textContent = `${gpsErrorMessage(err)}. Type a starting point instead.`; },
+    { enableHighAccuracy: false, timeout: 15000 },
+  );
+});
 $('btn-skip').addEventListener('click', skip);
 $('btn-mute').addEventListener('click', () => {
   player.setMuted(!player.muted);

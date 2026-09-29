@@ -47,6 +47,9 @@
           </button>
         </div>
         <p class="queue" id="queue-info" hidden></p>
+        <button id="btn-drive" class="secondary wide" type="button">
+          <strong>Just drive</strong><span>No plan needed: stories for wherever you go</span>
+        </button>
       </div>
 
       <div class="card">
@@ -63,6 +66,12 @@
       <form id="search" class="search" autocomplete="off">
         <input id="search-q" type="search" placeholder="Any place: a park, a town, a scenic road…" aria-label="Place to create a tour for" required>
         <button class="primary" type="submit">Create tour</button>
+      </form>
+      <form id="plan" class="plan" autocomplete="off">
+        <span class="plan-label">Plan a drive</span>
+        <input id="plan-from" type="search" placeholder="From: current location" aria-label="Start of the drive (leave empty for your current location)">
+        <input id="plan-to" type="search" placeholder="To: e.g. Denton, TX" aria-label="Destination" required>
+        <button class="primary" type="submit">Create drive</button>
       </form>
       <div class="search-row">
         <button id="btn-near" class="secondary" type="button">Create a tour around me</button>

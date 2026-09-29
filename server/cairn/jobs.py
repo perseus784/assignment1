@@ -29,6 +29,7 @@ class Job:
     error: Optional[str] = None
     created: float = field(default_factory=time.time)
     stats: dict = field(default_factory=dict)
+    empty: bool = False  # finished, but there was nothing worth telling here
 
     def public(self) -> dict:
         return {k: v for k, v in asdict(self).items() if k != "key"}
@@ -46,7 +47,7 @@ class JobQueue:
         key = req.cache_key()
         with self.lock:
             existing = self.by_key.get(key)
-            if existing and self.jobs[existing].status in ("queued", "running", "done"):
+            if existing and (self.jobs[existing].status in ("queued", "running", "done") or self.jobs[existing].empty):
                 return self.jobs[existing]
             done = self._already_built(key)
             job = Job(id=uuid.uuid4().hex[:12], key=key)
@@ -54,6 +55,10 @@ class JobQueue:
             self.by_key[key] = job.id
         if done:
             job.status, job.progress, job.message, job.tour_id = "done", 1.0, "Ready", done
+            return job
+        if (self.tours_dir / f".empty-{key}").exists():
+            job.status, job.progress, job.message, job.empty = "error", 1.0, "Nothing to tell here yet", True
+            job.error = job.message
             return job
         self.pool.submit(self._run, job, req)
         return job
@@ -77,6 +82,9 @@ class JobQueue:
             job.tour_id, job.stats, job.status = result.tour_id, result.stats, "done"
         except LookupError as exc:
             job.status, job.error, job.message = "error", str(exc), str(exc)
+            if req.cell:  # remember empty map cells so they aren't rebuilt on every request
+                job.empty = True
+                (self.tours_dir / f".empty-{job.key}").touch()
         except Exception as exc:  # report, don't crash the worker
             log.exception("Tour build failed")
             job.status, job.error, job.message = "error", f"Build failed: {exc}", "Build failed"
@@ -89,6 +97,8 @@ def catalog(tours_dir: Optional[Path] = None) -> list[dict]:
         try:
             m = json.loads(manifest_path.read_text())
         except (OSError, json.JSONDecodeError):
+            continue
+        if m.get("kind") == "cell":  # "just drive" cells aren't listed as tours
             continue
         out.append(summary(m, f"tours/{m['id']}/manifest.json"))
     return sorted(out, key=lambda t: t.get("generatedAt", ""), reverse=True)

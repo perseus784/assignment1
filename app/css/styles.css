@@ -55,6 +55,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; } /* component display rules must not un-hide elements */
 
 body {
   margin: 0;
@@ -153,6 +154,10 @@ button.secondary { min-height: 42px; }
 .upcoming li:last-child { border-bottom: 0; }
 .upcoming .num { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--accent-contrast); font-size: 13px; font-weight: 700; }
 .upcoming .played .num { background: var(--muted); }
+.upcoming .num.dot { width: 14px; height: 14px; margin: 0 6px; }
+button.wide { width: 100%; margin-top: 12px; display: grid; gap: 2px; text-align: left; padding: 12px 16px; }
+button.wide span { color: var(--muted); font-size: 14px; }
+.stop-marker.free { width: 16px; height: 16px; }
 .upcoming .played .title { color: var(--muted); }
 .upcoming .meta { display: block; color: var(--muted); font-size: 13px; }
 .upcoming .dist { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
@@ -162,6 +167,10 @@ button.secondary { min-height: 42px; }
 /* Tours */
 .search { display: flex; gap: 10px; }
 .search button { flex: none; }
+.plan { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; margin-top: 16px; align-items: center; }
+.plan-label { grid-column: 1 / -1; font-size: 14px; font-weight: 600; color: var(--muted); }
+.plan input { width: 100%; min-width: 0; font: inherit; color: inherit; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); min-height: 48px; padding: 0 16px; }
+@media (max-width: 560px) { .plan { grid-template-columns: 1fr; } }
 .search-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 10px 0 14px; }
 .search-row .hint { margin: 0; }
 .build { display: grid; gap: 6px; margin-bottom: 14px; font-size: 14px; color: var(--muted); }

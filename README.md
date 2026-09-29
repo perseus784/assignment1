@@ -39,10 +39,23 @@ Open http://localhost:8000. Two demo tours are bundled: **Yellowstone: Geyser Co
 scripts) and **Million Dollar Highway**, Colorado (written by the engine). To try one from
 home, open **Settings → Simulate a drive** and press **Start tour**.
 
-**Create a tour:** type any place ("Zion National Park", "Amalfi Coast", "Route 66 Flagstaff") and
-press **Create tour**, or use **Create a tour around me**. The engine builds it (about 10–40 s)
-and the app saves it for offline use. **Settings → Use demo data** makes the engine search
-its built-in sample places instead of live Wikipedia/OSM.
+Three ways to use it:
+
+- **Just drive.** Tap **Just drive** and go, with no plan and no destination. The engine divides
+  the world into ~11 km map cells. The app fetches the cells on the road ahead of you and
+  plays stories as you pass: a lake 2 km off the highway plays while it's in view, not once
+  you've gone by. Fetched cells are saved, so dead zones don't interrupt anything, and what
+  you've heard is remembered, so your daily commute doesn't repeat itself.
+- **Plan a drive.** Type **From** (or leave it empty for your current location) and **To**, e.g.
+  "Dallas, TX" → "Denton, TX". The engine routes it on real roads and picks stories for
+  that exact highway. Stories are paced for the road's real speed, so a highway drive is
+  spaced out more than a slow park road.
+- **Tour a place.** Type any place ("Zion National Park", "Amalfi Coast") and press
+  **Create tour**, or use **Create a tour around me**.
+
+Builds take about 10–40 seconds, and the app saves every tour for offline use.
+**Settings → Use demo data** makes the engine search its built-in sample places instead of
+live Wikipedia/OSM.
 
 On a phone, serve over HTTPS (GPS and offline mode require it) and use **Add to Home Screen**.
 
@@ -52,6 +65,8 @@ On a phone, serve over HTTPS (GPS and offline mode require it) and use **Add to 
 cd server
 ../.venv/bin/python -m cairn build --query "Glacier National Park"            # live data
 ../.venv/bin/python -m cairn build --route drive.json --name "Going-to-the-Sun Road"
+../.venv/bin/python -m cairn build --from "Dallas, TX" --to "Denton, TX"           # a drive from A to B
+../.venv/bin/python -m cairn build --cell 330_-970                                  # one "just drive" map cell (Lewisville, TX)
 ../.venv/bin/python -m cairn sounds --out /tmp/sounds                          # audition the sound library
 ../.venv/bin/python -m cairn serve --port 8000
 ```
@@ -89,6 +104,13 @@ cd server
    - **Area mode.** Places are picked with spatial diversity (maximal marginal relevance), then
      ordered with nearest-neighbour plus **2-opt**. The order is routed on real roads, then
      re-planned in route mode.
+   - **From A to B.** Both ends are geocoded and routed with OSRM. The road's average speed
+     (distance ÷ typical driving time) sets how much road each story needs, so highways get
+     fewer, better-spaced stories.
+   - **Map cells** (`cells.py`, for "just drive"). Places inside one 0.1° square are selected
+     with spatial diversity. Since the road isn't known, each stop carries a `reach` (how far
+     off the road it can still be seen), and the app announces it as you head past within
+     that distance.
    - Geofences are sized per category and shrunk so neighbours never overlap.
 4. **Write** (`writing/`): one house style for both writers. The narrator orients, the
    storyteller carries the story, and each episode is 55–95 words. The Claude writer uses
@@ -106,12 +128,29 @@ cd server
 A PWA in plain ES modules with no build step:
 - `player.js` mixes episodes live with Web Audio (beds duck under narration).
 - `speech.js` picks two distinct on-device voices for the two roles.
-- `engine.js` handles geofences and look-ahead.
+- `engine.js` handles geofences, look-ahead and pass-by triggering.
+- `drive.js` runs "just drive": it fetches the map cells ahead of you, saves them offline and
+  retries while the engine builds them.
 - `map.js` uses vendored MapLibre with OpenFreeMap tiles online, a pack's PMTiles offline, or a
   plain canvas. The route and stops always draw.
 - `sw.js` provides offline caching, including Range requests for PMTiles.
 - **Navigate** hands off to Google Maps, Apple Maps or Waze. Cairn keeps narrating
   alongside it.
+
+## The API
+
+The server is a plain HTTP API (interactive reference at `/docs`), and the web app is one client
+of it.
+
+| Call | What it does |
+| --- | --- |
+| `POST /v1/tours` | Build a tour. Body: `{"query": "Zion National Park"}`, `{"origin": "Dallas, TX", "destination": "Denton, TX"}` (names or `[lat, lon]`), `{"center": [lat, lon], "radius_m": 20000}` or `{"route": [[lat, lon], …]}`. Returns a job. |
+| `GET /v1/jobs/{id}` | Build progress. |
+| `GET /v1/tours` | Built tours. |
+| `GET /v1/cells/{cell}` | "Just drive" pack for one map cell (e.g. `330_-970`). Answers `building` (202, poll again), `ready` (with the manifest URL) or `empty`. |
+| `GET /v1/explore?lat=…&lon=…` | Quick ranked places near a point, with no audio. |
+| `GET /v1/geocode?q=…` | Place lookup. |
+| `GET /tours/{id}/manifest.json` | A tour pack ([format](docs/tour-format.md)). |
 
 ## Known limitations
 

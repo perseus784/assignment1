@@ -57,8 +57,8 @@ export class EpisodePlayer {
     if (muted) this.speech.cancel();
   }
 
-  load(path) {
-    const url = this.resolve(path);
+  load(path, base) {
+    const url = base ? new URL(path, base).href : this.resolve(path);
     if (!this.buffers.has(url)) {
       const p = fetch(url)
         .then((r) => {
@@ -73,17 +73,21 @@ export class EpisodePlayer {
   }
 
   /** Warm the decode cache for an episode so playback starts instantly. */
-  preload(episode) {
+  preload(episode, base) {
     if (!this.ctx) return;
-    for (const seg of episode.segments) if (seg.audio) this.load(seg.audio).catch(() => {});
+    for (const seg of episode.segments) if (seg.audio) this.load(seg.audio, base).catch(() => {});
   }
 
   stop() {
     this.controller?.abort();
   }
 
-  /** Play an episode to the end (or until stopped). */
-  async play(episode) {
+  /**
+   * Play an episode to the end (or until stopped).
+   * @param {object} episode
+   * @param {{base?: string}} [opts] URL of the manifest the episode's audio paths are relative to
+   */
+  async play(episode, { base } = {}) {
     this.stop();
     const controller = new AbortController();
     this.controller = controller;
@@ -127,12 +131,12 @@ export class EpisodePlayer {
         if (seg.type === 'pause') {
           await sleep((seg.seconds ?? 0.6) * 1000, signal);
         } else if (seg.type === 'bed') {
-          const buffer = await this.load(seg.audio).catch(() => null);
+          const buffer = await this.load(seg.audio, base).catch(() => null);
           if (!buffer || signal.aborted) continue;
           if (beds.length >= 2) fadeOut(ctx, beds.shift(), 1.5);
           beds.push(startSource(buffer, this.bedBus, (seg.gain ?? 0.5) * this.volume.beds, { loop: true, fadeIn: 1.5 }));
         } else if (seg.type === 'sfx' || seg.type === 'music') {
-          const buffer = await this.load(seg.audio).catch(() => null);
+          const buffer = await this.load(seg.audio, base).catch(() => null);
           if (!buffer || signal.aborted) continue;
           const node = startSource(buffer, this.fxBus, (seg.gain ?? 0.7) * this.volume.effects);
           oneShots.push(node);
@@ -141,7 +145,7 @@ export class EpisodePlayer {
           this.onLine({ text: seg.text, voice: seg.voice });
           duck(true);
           if (seg.audio) {
-            const buffer = await this.load(seg.audio).catch(() => null);
+            const buffer = await this.load(seg.audio, base).catch(() => null);
             if (buffer && !signal.aborted) {
               const node = startSource(buffer, this.voiceBus, 1);
               oneShots.push(node);
