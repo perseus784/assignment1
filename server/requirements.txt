@@ -1,0 +1,15 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+httpx>=0.27
+numpy>=2.0
+scipy>=1.13
+lameenc>=1.7
+anthropic>=1.0
+
+# Optional: studio-quality narration with Kokoro-82M (Apache-2.0).
+# pip install kokoro-onnx, download kokoro-v1.0.onnx + voices-v1.0.bin from the official
+# kokoro-onnx release, then set TRAILSIDE_KOKORO_MODEL / TRAILSIDE_KOKORO_VOICES.
+# kokoro-onnx
+
+# Development
+pytest>=8

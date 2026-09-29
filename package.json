@@ -1,11 +1,11 @@
 {
   "name": "trailside-tour-guide",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "Offline-first GPS audio tour guide PWA",
+  "description": "Trailside: GPS audio tour engine + offline-first player app",
   "type": "module",
   "scripts": {
-    "start": "python3 -m http.server 8080",
-    "test": "node --test tests/*.test.js"
+    "start": "cd server && ../.venv/bin/python -m trailside serve --port 8000",
+    "test": "node --test app/tests/*.test.js && .venv/bin/python -m pytest -q server/tests"
   }
 }

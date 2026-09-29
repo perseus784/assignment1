@@ -1,0 +1,307 @@
+{
+  "note": "Demo fixture in the shape of the live Wikipedia/Wikidata pipeline output. Extracts were written for Trailside; sitelink counts are illustrative; coordinates are approximate.",
+  "geocode": {
+    "name": "Yellowstone National Park",
+    "aliases": [
+      "yellowstone",
+      "yellowstone national park",
+      "old faithful"
+    ],
+    "center": [
+      44.53,
+      -110.83
+    ],
+    "bounds": {
+      "south": 44.4,
+      "north": 44.7,
+      "west": -110.92,
+      "east": -110.68
+    },
+    "region": "Wyoming, USA"
+  },
+  "route": [
+    [
+      44.652,
+      -110.856
+    ],
+    [
+      44.6453,
+      -110.8607
+    ],
+    [
+      44.638,
+      -110.864
+    ],
+    [
+      44.63,
+      -110.862
+    ],
+    [
+      44.615,
+      -110.852
+    ],
+    [
+      44.6,
+      -110.842
+    ],
+    [
+      44.585,
+      -110.835
+    ],
+    [
+      44.57,
+      -110.829
+    ],
+    [
+      44.556,
+      -110.82
+    ],
+    [
+      44.55,
+      -110.812
+    ],
+    [
+      44.54,
+      -110.825
+    ],
+    [
+      44.528,
+      -110.835
+    ],
+    [
+      44.515,
+      -110.84
+    ],
+    [
+      44.5,
+      -110.847
+    ],
+    [
+      44.486,
+      -110.849
+    ],
+    [
+      44.474,
+      -110.843
+    ],
+    [
+      44.464,
+      -110.849
+    ],
+    [
+      44.46,
+      -110.838
+    ],
+    [
+      44.455,
+      -110.82
+    ],
+    [
+      44.446,
+      -110.806
+    ],
+    [
+      44.442,
+      -110.78
+    ],
+    [
+      44.444,
+      -110.755
+    ],
+    [
+      44.4445,
+      -110.73
+    ]
+  ],
+  "places": [
+    {
+      "id": "fx:madison-junction",
+      "name": "Madison Junction",
+      "lat": 44.6453,
+      "lon": -110.8607,
+      "description": "river confluence in Yellowstone National Park",
+      "types": [
+        "confluence",
+        "junction"
+      ],
+      "sitelinks": 4,
+      "heritage": false,
+      "extract": "Madison Junction is the point in Yellowstone National Park where the Gibbon and Firehole rivers meet to form the Madison River, one of the three headwaters of the Missouri. Lewis and Clark named the Madison in 1805 after James Madison, then Secretary of State. National Park Mountain rises above the junction. According to a popular legend, members of the Washburn expedition camped nearby in September 1870 and conceived the idea of a national park around their campfire; historians now regard the story as embellished, but it gave the mountain its name."
+    },
+    {
+      "id": "fx:firehole-canyon",
+      "name": "Firehole Canyon",
+      "lat": 44.6317,
+      "lon": -110.8634,
+      "description": "canyon of the Firehole River",
+      "types": [
+        "canyon"
+      ],
+      "sitelinks": 2,
+      "extract": "Firehole Canyon is a canyon cut by the Firehole River through rhyolite lava flows that spread across the area after Yellowstone's most recent caldera-forming eruption. The river's name comes from early fur trappers, who used the word hole for a mountain valley and thought the steam rising from the geyser basins upstream looked like smoke. A one-way side road, Firehole Canyon Drive, passes the forty-foot Firehole Falls."
+    },
+    {
+      "id": "fx:nez-perce-creek",
+      "name": "Nez Perce Creek",
+      "lat": 44.581,
+      "lon": -110.833,
+      "description": "creek in Yellowstone National Park",
+      "types": [
+        "creek"
+      ],
+      "sitelinks": 2,
+      "extract": "Nez Perce Creek is a tributary of the Firehole River named for the Nez Perce people. In August 1877, roughly eight hundred Nez Perce men, women and children, pursued by the United States Army, crossed the young national park as they fled toward Canada, travelling up this valley from the Lower Geyser Basin. Along the way they encountered parties of tourists. The Nez Perce surrendered that October in Montana, about forty miles short of the Canadian border."
+    },
+    {
+      "id": "fx:madison-campground",
+      "name": "Madison Campground",
+      "lat": 44.644,
+      "lon": -110.864,
+      "description": "campground",
+      "types": [
+        "campground"
+      ],
+      "sitelinks": 0,
+      "extract": "Madison Campground is a campground operated by a park concessioner near Madison Junction. It has several hundred sites and is open from spring to autumn, with reservations recommended in summer."
+    },
+    {
+      "id": "fx:fountain-paint-pot",
+      "name": "Fountain Paint Pot",
+      "lat": 44.5494,
+      "lon": -110.8076,
+      "description": "mud pot in the Lower Geyser Basin",
+      "types": [
+        "mud pot",
+        "hydrothermal feature"
+      ],
+      "sitelinks": 5,
+      "extract": "Fountain Paint Pot is a mud pot in the Lower Geyser Basin and the centrepiece of a short boardwalk that shows all four types of Yellowstone's hydrothermal features: hot springs, geysers, fumaroles and mudpots. The mud forms where acidic gases break down the surrounding rock into clay; it is thin and splashy in the wet spring and thick by late summer. Nearby Clepsydra Geyser has erupted almost continuously since the 1959 Hebgen Lake earthquake."
+    },
+    {
+      "id": "fx:grand-prismatic",
+      "name": "Grand Prismatic Spring",
+      "lat": 44.5251,
+      "lon": -110.8382,
+      "description": "hot spring in Yellowstone National Park",
+      "types": [
+        "hot spring"
+      ],
+      "sitelinks": 38,
+      "extract": "Grand Prismatic Spring is the largest hot spring in the United States and the third largest in the world, about three hundred seventy feet across, in the Midway Geyser Basin. Its bands of colour are microbial mats of heat-loving microorganisms, each band living at a different temperature. The deep blue centre is too hot for most life and owes its colour to the way water scatters light. The spring was described by the Hayden expedition of 1871."
+    },
+    {
+      "id": "fx:excelsior-geyser",
+      "name": "Excelsior Geyser",
+      "lat": 44.5243,
+      "lon": -110.8357,
+      "description": "geyser crater in the Midway Geyser Basin",
+      "types": [
+        "geyser"
+      ],
+      "sitelinks": 9,
+      "extract": "Excelsior Geyser is a large geyser crater in the Midway Geyser Basin. In the 1880s it erupted frequently to heights of around three hundred feet, among the largest eruptions ever recorded. Today it behaves as a hot spring, discharging thousands of gallons of boiling water into the Firehole River every minute."
+    },
+    {
+      "id": "fx:biscuit-basin",
+      "name": "Biscuit Basin",
+      "lat": 44.4854,
+      "lon": -110.8519,
+      "description": "geyser basin in Yellowstone National Park",
+      "types": [
+        "geyser basin"
+      ],
+      "sitelinks": 6,
+      "extract": "Biscuit Basin is a geyser basin named for knobby mineral deposits that once surrounded Sapphire Pool and resembled biscuits. After the 1959 Hebgen Lake earthquake, Sapphire Pool erupted violently and destroyed most of them. On July 23, 2024, a hydrothermal explosion near Black Diamond Pool threw rocks and debris into the air and damaged the boardwalk."
+    },
+    {
+      "id": "fx:black-sand-basin",
+      "name": "Black Sand Basin",
+      "lat": 44.462,
+      "lon": -110.8545,
+      "description": "geyser basin in Yellowstone National Park",
+      "types": [
+        "geyser basin"
+      ],
+      "sitelinks": 4,
+      "extract": "Black Sand Basin takes its name from sand made of obsidian, a black volcanic glass. Emerald Pool, coloured by yellow microbes against blue water, and Cliff Geyser are among its features. In the park's early days, visitors dropped handkerchiefs into Handkerchief Pool and watched them get pulled under and return clean; debris thrown in later clogged the pool."
+    },
+    {
+      "id": "fx:upper-geyser-basin",
+      "name": "Upper Geyser Basin",
+      "lat": 44.463,
+      "lon": -110.834,
+      "description": "geyser basin containing Old Faithful",
+      "types": [
+        "geyser basin"
+      ],
+      "sitelinks": 14,
+      "extract": "The Upper Geyser Basin holds the largest concentration of geysers on Earth, about one hundred fifty within roughly one square mile. Besides Old Faithful it includes Grand Geyser, the tallest regularly predicted geyser, and Castle Geyser, whose sinter cone may be thousands of years old."
+    },
+    {
+      "id": "fx:old-faithful",
+      "name": "Old Faithful",
+      "lat": 44.4605,
+      "lon": -110.8281,
+      "description": "cone geyser in Yellowstone National Park",
+      "types": [
+        "geyser",
+        "cone geyser"
+      ],
+      "sitelinks": 52,
+      "extract": "Old Faithful is a cone geyser in the Upper Geyser Basin, named in 1870 by the Washburn expedition for its dependable eruptions. It is not the tallest or most regular geyser in the park but is the most famous. It erupts about every sixty to one hundred ten minutes, sending water between one hundred and one hundred eighty-five feet high. Rangers predict each eruption from the duration of the previous one: longer eruptions are followed by longer waits."
+    },
+    {
+      "id": "fx:old-faithful-inn",
+      "name": "Old Faithful Inn",
+      "lat": 44.4597,
+      "lon": -110.8305,
+      "description": "historic hotel in Yellowstone National Park",
+      "types": [
+        "hotel",
+        "log building"
+      ],
+      "sitelinks": 12,
+      "heritage": true,
+      "inception": 1904,
+      "extract": "Old Faithful Inn is a log-and-stone hotel completed in 1904 to a design by the young architect Robert Reamer. Its lobby rises through several storeys of lodgepole pine around a massive stone fireplace. It is among the largest log structures in the world and was designated a National Historic Landmark in 1987."
+    },
+    {
+      "id": "fx:old-faithful-visitor-center",
+      "name": "Old Faithful Visitor Education Center",
+      "lat": 44.4592,
+      "lon": -110.8291,
+      "description": "visitor center",
+      "types": [
+        "visitor center",
+        "office building"
+      ],
+      "sitelinks": 1,
+      "extract": "The Old Faithful Visitor Education Center is a visitor center opened in 2010 with exhibits on hydrothermal science. It posts predicted eruption times for several geysers and has restrooms, a bookstore and ranger programs."
+    },
+    {
+      "id": "fx:kepler-cascades",
+      "name": "Kepler Cascades",
+      "lat": 44.4453,
+      "lon": -110.8076,
+      "description": "waterfall on the Firehole River",
+      "types": [
+        "waterfall",
+        "cascade"
+      ],
+      "sitelinks": 3,
+      "extract": "Kepler Cascades is a series of drops on the Firehole River totalling about one hundred fifty feet, visible from a platform beside the road. In 1881 park superintendent Philetus Norris named the cascades after Kepler Hoyt, the twelve-year-old son of Wyoming's territorial governor, who was touring the park with his father."
+    },
+    {
+      "id": "fx:isa-lake",
+      "name": "Isa Lake",
+      "lat": 44.4443,
+      "lon": -110.7291,
+      "description": "lake on the Continental Divide at Craig Pass",
+      "types": [
+        "lake"
+      ],
+      "sitelinks": 7,
+      "extract": "Isa Lake is a small lily-covered lake at Craig Pass on the Continental Divide that drains to both the Atlantic and Pacific oceans. Because the Divide loops around the pass, water leaving the lake's east side reaches the Pacific, while water leaving its west side reaches the Atlantic by way of the Missouri and Mississippi rivers."
+    }
+  ]
+}
