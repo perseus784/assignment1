@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f1714">
+  <meta name="description" content="GPS audio tour guide: stories, sound and history about the places you drive past, even with no signal.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Cairn Trail Guide</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="vendor/maplibre/maplibre-gl.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="vendor/pmtiles/pmtiles.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <img src="icons/icon.svg" alt="" width="28" height="28">
+      <span>Cairn</span>
+    </div>
+    <div class="status" role="status" aria-live="polite">
+      <span class="dot" id="status-dot"></span><span id="status-text">Idle</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="drive">
+      <div class="map-wrap">
+        <div id="map" aria-label="Map of the tour"></div>
+        <button id="btn-recenter" class="map-btn" hidden>Recenter</button>
+      </div>
+
+      <div class="card now" aria-labelledby="now-title">
+        <p class="eyebrow" id="now-eyebrow">Ready</p>
+        <h1 id="now-title">Choose a tour and start driving</h1>
+        <p class="line" id="now-line"><span class="who" id="now-who"></span><span id="now-text">Stories play automatically as you approach each place, with sound and music. Download a tour while you have signal and it works fully offline.</span></p>
+        <div class="controls">
+          <button id="btn-start" class="primary big">Start tour</button>
+          <button id="btn-skip" class="icon" aria-label="Skip story" title="Skip" disabled>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5v14l10-7zM17 5h2v14h-2z"/></svg>
+          </button>
+          <button id="btn-mute" class="icon" aria-label="Mute" aria-pressed="false" title="Mute">
+            <svg viewBox="0 0 24 24" aria-hidden="true" id="icon-sound"><path d="M4 9v6h4l5 4V5L8 9zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>
+          </button>
+        </div>
+        <p class="queue" id="queue-info" hidden></p>
+        <button id="btn-drive" class="secondary wide" type="button">
+          <strong>Just drive</strong><span>No plan needed: stories for wherever you go</span>
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>Coming up</h2>
+          <a id="nav-next" class="nav-link" target="_blank" rel="noopener" hidden>Navigate to next stop</a>
+        </div>
+        <ol id="upcoming" class="upcoming"><li class="empty">Pick a tour to see its stops.</li></ol>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="tours-title">
+      <h2 id="tours-title">Tours</h2>
+      <form id="search" class="search" autocomplete="off">
+        <input id="search-q" type="search" placeholder="Any place: a park, a town, a scenic road…" aria-label="Place to create a tour for" required>
+        <button class="primary" type="submit">Create tour</button>
+      </form>
+      <form id="plan" class="plan" autocomplete="off">
+        <span class="plan-label">Plan a drive</span>
+        <input id="plan-from" type="search" placeholder="From: current location" aria-label="Start of the drive (leave empty for your current location)">
+        <input id="plan-to" type="search" placeholder="To: e.g. Denton, TX" aria-label="Destination" required>
+        <button class="primary" type="submit">Create drive</button>
+      </form>
+      <div class="search-row">
+        <button id="btn-near" class="secondary" type="button">Create a tour around me</button>
+        <span class="hint" id="engine-hint"></span>
+      </div>
+      <div id="build" class="build" hidden>
+        <progress id="build-progress" max="1" value="0"></progress>
+        <span id="build-text"></span>
+      </div>
+      <ul id="tours" class="tours"><li class="empty">Loading…</li></ul>
+      <p class="hint" id="offline-hint"></p>
+    </section>
+
+    <details class="card settings">
+      <summary><h2>Settings</h2></summary>
+      <label class="row">
+        <span>Simulate a drive <small>Drive the tour's route virtually, to try it from home</small></span>
+        <input type="checkbox" id="opt-sim">
+      </label>
+      <label class="row">
+        <span>Simulation speed</span>
+        <select id="opt-sim-speed">
+          <option value="1">Real time</option>
+          <option value="3" selected>3×</option>
+          <option value="8">8×</option>
+        </select>
+      </label>
+      <label class="row">
+        <span>Ambience volume <small>Background sounds under the narration</small></span>
+        <input type="range" id="opt-beds" min="0" max="1.5" step="0.1" value="1">
+      </label>
+      <label class="row">
+        <span>Speaking rate <small>For on-device voices</small></span>
+        <input type="range" id="opt-rate" min="0.8" max="1.2" step="0.05" value="1">
+      </label>
+      <div class="row">
+        <span>Voices <small id="voice-info">Narrator and storyteller</small></span>
+        <button id="btn-voices" class="secondary" type="button">Hear them</button>
+      </div>
+      <label class="row">
+        <span>Units</span>
+        <select id="opt-units">
+          <option value="imperial">Miles / feet</option>
+          <option value="metric">Kilometres / metres</option>
+        </select>
+      </label>
+      <label class="row">
+        <span>Look-ahead <small>Start stories this many seconds before you arrive</small></span>
+        <select id="opt-lead">
+          <option value="10">10 s</option>
+          <option value="20" selected>20 s</option>
+          <option value="40">40 s</option>
+        </select>
+      </label>
+      <label class="row">
+        <span>Navigation app</span>
+        <select id="opt-nav">
+          <option value="auto">Automatic</option>
+          <option value="google">Google Maps</option>
+          <option value="apple">Apple Maps</option>
+          <option value="waze">Waze</option>
+        </select>
+      </label>
+      <label class="row">
+        <span>Tour engine <small>Server that researches places and produces tours</small></span>
+        <input type="url" id="opt-server" placeholder="https://your-engine.example">
+      </label>
+      <label class="row" id="row-demo" hidden>
+        <span>Use demo data <small>The engine's built-in sample places instead of live Wikipedia/OSM</small></span>
+        <input type="checkbox" id="opt-demo">
+      </label>
+      <div class="row">
+        <span>Trip history <small>Stories you've heard won't repeat</small></span>
+        <button id="btn-reset" class="secondary" type="button">Reset trip</button>
+      </div>
+    </details>
+
+    <p class="safety">Keep your eyes on the road. Set up the tour before you start driving.</p>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

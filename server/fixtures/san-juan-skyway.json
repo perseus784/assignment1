@@ -1,0 +1,273 @@
+{
+  "note": "Demo fixture: Silverton to Ouray on US 550 (the Million Dollar Highway), Colorado. Extracts were written for Cairn; sitelink counts are illustrative; coordinates are approximate.",
+  "geocode": {
+    "name": "Million Dollar Highway",
+    "aliases": [
+      "million dollar highway",
+      "san juan skyway",
+      "silverton to ouray",
+      "us 550"
+    ],
+    "center": [
+      37.92,
+      -107.69
+    ],
+    "bounds": {
+      "south": 37.79,
+      "north": 38.04,
+      "west": -107.74,
+      "east": -107.64
+    },
+    "region": "Colorado, USA"
+  },
+  "route": [
+    [
+      37.8121,
+      -107.6628
+    ],
+    [
+      37.821,
+      -107.67
+    ],
+    [
+      37.83,
+      -107.679
+    ],
+    [
+      37.842,
+      -107.69
+    ],
+    [
+      37.856,
+      -107.701
+    ],
+    [
+      37.8667,
+      -107.7078
+    ],
+    [
+      37.88,
+      -107.715
+    ],
+    [
+      37.8986,
+      -107.7131
+    ],
+    [
+      37.91,
+      -107.706
+    ],
+    [
+      37.92,
+      -107.701
+    ],
+    [
+      37.929,
+      -107.696
+    ],
+    [
+      37.936,
+      -107.68
+    ],
+    [
+      37.95,
+      -107.674
+    ],
+    [
+      37.965,
+      -107.671
+    ],
+    [
+      37.98,
+      -107.668
+    ],
+    [
+      37.995,
+      -107.664
+    ],
+    [
+      38.006,
+      -107.6632
+    ],
+    [
+      38.015,
+      -107.668
+    ],
+    [
+      38.0228,
+      -107.6714
+    ]
+  ],
+  "places": [
+    {
+      "id": "fx:silverton",
+      "name": "Silverton, Colorado",
+      "lat": 37.8119,
+      "lon": -107.6645,
+      "description": "town in San Juan County, Colorado",
+      "types": [
+        "town",
+        "county seat"
+      ],
+      "sitelinks": 41,
+      "heritage": true,
+      "inception": 1874,
+      "extract": "Silverton is a former silver mining town in the San Juan Mountains at an elevation of more than nine thousand three hundred feet. It was laid out in 1874, and miners liked to say they had no gold, but silver by the ton. Its historic district was designated a National Historic Landmark in 1961. The last large mine in the area, the Sunnyside, closed in 1991, and the town now lives on tourism and the narrow-gauge railroad."
+    },
+    {
+      "id": "fx:dsng",
+      "name": "Durango and Silverton Narrow Gauge Railroad",
+      "lat": 37.8105,
+      "lon": -107.661,
+      "description": "heritage narrow-gauge railroad in Colorado",
+      "types": [
+        "heritage railway",
+        "narrow-gauge railway"
+      ],
+      "sitelinks": 18,
+      "heritage": true,
+      "inception": 1882,
+      "extract": "The Durango and Silverton Narrow Gauge Railroad is a forty-five-mile heritage railway between Durango and Silverton. The Denver and Rio Grande Railway built the line in 1881 and 1882 to haul silver and gold ore out of the San Juan Mountains. Steam locomotives have worked the route ever since, following the Animas River through a narrow canyon. The line was designated a National Historic Landmark in 1961."
+    },
+    {
+      "id": "fx:silverton-shop",
+      "name": "Silverton Visitor Center",
+      "lat": 37.813,
+      "lon": -107.666,
+      "description": "visitor center",
+      "types": [
+        "visitor center",
+        "office building"
+      ],
+      "sitelinks": 0,
+      "extract": "The Silverton Visitor Center provides maps, restrooms and information about lodging, jeep tours and train schedules for visitors arriving in town."
+    },
+    {
+      "id": "fx:chattanooga",
+      "name": "Chattanooga, Colorado",
+      "lat": 37.8667,
+      "lon": -107.7078,
+      "description": "ghost town in San Juan County, Colorado",
+      "types": [
+        "ghost town"
+      ],
+      "sitelinks": 2,
+      "extract": "Chattanooga is a ghost town at the foot of the switchbacks below Red Mountain Pass. It began in the 1880s as a supply stop and mining camp on the road between Silverton and the Red Mountain district, and faded when the mines declined."
+    },
+    {
+      "id": "fx:red-mountain-pass",
+      "name": "Red Mountain Pass",
+      "lat": 37.8986,
+      "lon": -107.7131,
+      "description": "mountain pass in the San Juan Mountains",
+      "types": [
+        "mountain pass"
+      ],
+      "sitelinks": 9,
+      "extract": "Red Mountain Pass is a mountain pass at eleven thousand eighteen feet on the highway between Silverton and Ouray. It is named for the three Red Mountains nearby, whose slopes are stained red and orange by iron oxide in the rock. The road over the pass crosses dozens of avalanche paths and is one of the most avalanche-prone highways in the United States."
+    },
+    {
+      "id": "fx:yankee-girl",
+      "name": "Yankee Girl Mine",
+      "lat": 37.929,
+      "lon": -107.699,
+      "description": "historic silver mine in the Red Mountain mining district",
+      "types": [
+        "mine",
+        "silver mine"
+      ],
+      "sitelinks": 3,
+      "extract": "The Yankee Girl Mine was one of the richest silver mines of the Red Mountain mining district. Prospectors struck its ore body in 1882, setting off a rush that filled the valley with camps. Miners followed the ore deep underground, where acidic water corroded pumps and rails. Its weathered wooden shaft house still stands on the hillside above the highway."
+    },
+    {
+      "id": "fx:ironton",
+      "name": "Ironton, Colorado",
+      "lat": 37.9336,
+      "lon": -107.677,
+      "description": "ghost town in Ouray County, Colorado",
+      "types": [
+        "ghost town"
+      ],
+      "sitelinks": 3,
+      "inception": 1883,
+      "extract": "Ironton is a ghost town in a broad valley below Red Mountain Pass. Founded in 1883 as a supply town for the Red Mountain mines, it had hotels, saloons and a stage stop. In the late 1880s Otto Mears built the Silverton Railroad over the pass to reach it, including a turntable housed in a covered shed at Corkscrew Gulch. When the silver market collapsed in 1893, the town began to empty."
+    },
+    {
+      "id": "fx:million-dollar-highway",
+      "name": "Million Dollar Highway",
+      "lat": 37.995,
+      "lon": -107.664,
+      "description": "section of U.S. Route 550 in Colorado",
+      "types": [
+        "road",
+        "scenic byway"
+      ],
+      "sitelinks": 11,
+      "extract": "The Million Dollar Highway is the twenty-five-mile stretch of U.S. Route 550 between Silverton and Ouray, cut into cliffs above the Uncompahgre Gorge, often with no guardrails and sheer drops beside the lanes. It follows the route of a toll road that Otto Mears blasted through the canyon in the 1880s. No one agrees where the name came from: some say the road cost a million dollars a mile, others that the fill used to build it was full of gold ore."
+    },
+    {
+      "id": "fx:uncompahgre-gorge",
+      "name": "Uncompahgre Gorge",
+      "lat": 38.0,
+      "lon": -107.66,
+      "description": "canyon of the Uncompahgre River",
+      "types": [
+        "canyon",
+        "gorge"
+      ],
+      "sitelinks": 2,
+      "extract": "The Uncompahgre Gorge is a deep, narrow canyon where the Uncompahgre River drops from the Red Mountain district toward Ouray. The highway clings to its east wall."
+    },
+    {
+      "id": "fx:bear-creek-falls",
+      "name": "Bear Creek Falls",
+      "lat": 38.0056,
+      "lon": -107.6636,
+      "description": "waterfall near Ouray, Colorado",
+      "types": [
+        "waterfall"
+      ],
+      "sitelinks": 3,
+      "extract": "Bear Creek Falls is a waterfall where Bear Creek plunges into the Uncompahgre Gorge, directly beneath a highway bridge. Otto Mears once kept a toll gate here on his road between Ouray and the mines, charging travellers, wagons and pack animals to pass. The toll house site sits beside an overlook today."
+    },
+    {
+      "id": "fx:ouray",
+      "name": "Ouray, Colorado",
+      "lat": 38.0228,
+      "lon": -107.6714,
+      "description": "city in Ouray County, Colorado",
+      "types": [
+        "city",
+        "county seat"
+      ],
+      "sitelinks": 33,
+      "heritage": true,
+      "inception": 1876,
+      "extract": "Ouray is a small mountain town boxed in by steep peaks, nicknamed the Switzerland of America. It was founded as a mining camp in 1876 and named after Chief Ouray, a leader of the Ute people who negotiated with the United States government during the years the Utes lost most of their Colorado lands. Hot springs rise at the edge of town, and many of its Victorian buildings survive from the mining boom."
+    },
+    {
+      "id": "fx:ouray-hot-springs",
+      "name": "Ouray Hot Springs",
+      "lat": 38.029,
+      "lon": -107.672,
+      "description": "hot springs pool in Ouray, Colorado",
+      "types": [
+        "hot spring",
+        "swimming pool"
+      ],
+      "sitelinks": 1,
+      "extract": "Ouray Hot Springs is a public pool fed by natural hot springs at the north end of town. The Ute people used the springs long before miners arrived."
+    }
+  ],
+  "gazetteer": {
+    "silverton": [
+      37.8121,
+      -107.6628
+    ],
+    "ouray": [
+      38.0228,
+      -107.6714
+    ]
+  },
+  "speed_mps": 13.0
+}

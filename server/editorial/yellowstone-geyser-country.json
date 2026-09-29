@@ -1,0 +1,254 @@
+{
+  "id": "yellowstone-geyser-country",
+  "name": "Yellowstone: Geyser Country",
+  "region": "Wyoming, USA",
+  "description": "Madison Junction to Craig Pass on the Grand Loop Road, through the Lower, Midway and Upper Geyser Basins.",
+  "skip": ["Excelsior Geyser"],
+  "note": "Demo tour. Coordinates are approximate; verify against official NPS data before relying on them.",
+  "intro": {
+    "title": "Welcome to Yellowstone",
+    "segments": [
+      {"type": "music", "sound": "intro", "gain": 0.7, "wait": false},
+      {"type": "bed", "sound": "pad", "gain": 0.3},
+      {"type": "pause", "seconds": 2.5},
+      {"type": "say", "voice": "narrator", "text": "Welcome to Yellowstone. The world's first national park, since March first, eighteen seventy-two."},
+      {"type": "bed", "sound": "hot_spring", "gain": 0.3},
+      {"type": "pause", "seconds": 0.5},
+      {"type": "say", "voice": "storyteller", "text": "Beneath this road sits one of the largest volcanic systems on Earth. Its heat feeds more than ten thousand hot springs, mudpots and geysers. About half the world's geysers are right here."},
+      {"type": "pause", "seconds": 0.5},
+      {"type": "say", "voice": "narrator", "text": "Keep your eyes on the road. I'll tell you when something's worth a look."},
+      {"type": "pause", "seconds": 1.0}
+    ]
+  },
+  "stops": {
+    "Madison Junction": {
+      "segments": [
+        {"type": "music", "sound": "transition", "gain": 0.5, "wait": false},
+        {"type": "bed", "sound": "river", "gain": 0.5},
+        {"type": "bed", "sound": "campfire", "gain": 0.25},
+        {"type": "pause", "seconds": 0.8},
+        {"type": "say", "voice": "narrator", "text": "Madison Junction. Two rivers, the Gibbon and the Firehole, meet here and become the Madison."},
+        {"type": "pause", "seconds": 0.4},
+        {"type": "say", "voice": "storyteller", "text": "In September eighteen seventy, a party of explorers camped near this spot. The story goes that around their fire, they decided this land should belong to no one, and to everyone."},
+        {"type": "pause", "seconds": 0.3},
+        {"type": "say", "voice": "storyteller", "text": "Historians doubt it happened quite like that. But the mountain above you still carries the name. National Park Mountain."},
+        {"type": "pause", "seconds": 1.2}
+      ]
+    },
+    "Firehole Canyon": {
+      "segments": [
+        {"type": "music", "sound": "transition", "gain": 0.5, "wait": false},
+        {"type": "bed", "sound": "river", "gain": 0.55},
+        {"type": "bed", "sound": "wind", "gain": 0.2},
+        {"type": "pause", "seconds": 0.8},
+        {"type": "say", "voice": "narrator", "text": "Those dark cliffs are old lava. The Firehole River has cut straight through them."},
+        {"type": "pause", "seconds": 0.4},
+        {"type": "say", "voice": "storyteller", "text": "The trappers who came here first called a mountain valley a hole. And upstream, steam drifted over the water like smoke from a fire. So they called it the Firehole."},
+        {"type": "pause", "seconds": 1.2}
+      ]
+    },
+    "Nez Perce Creek": {
+      "segments": [
+        {"type": "music", "sound": "transition", "gain": 0.45, "wait": false},
+        {"type": "bed", "sound": "solemn", "gain": 0.35},
+        {"type": "bed", "sound": "horses", "gain": 0.2},
+        {"type": "pause", "seconds": 0.8},
+        {"type": "say", "voice": "narrator", "text": "This is Nez Perce Creek."},
+        {"type": "pause", "seconds": 0.4},
+        {"type": "say", "voice": "storyteller", "text": "In August eighteen seventy-seven, about eight hundred Nez Perce, families, elders, children, came up this valley with the army behind them. They were trying to reach Canada."},
+        {"type": "sfx", "sound": "hoofbeats", "gain": 0.4, "wait": false},
+        {"type": "pause", "seconds": 0.5},
+        {"type": "say", "voice": "storyteller", "text": "They crossed a park that was only five years old. That October, in Montana, they surrendered. Forty miles from the border."},
+        {"type": "pause", "seconds": 0.4},
+        {"type": "say", "voice": "narrator", "text": "The creek still carries their name."},
+        {"type": "pause", "seconds": 1.5}
+      ]
+    },
+    "Fountain Paint Pot": {
+      "segments": [
+        {"type": "music", "sound": "transition", "gain": 0.5, "wait": false},
+        {"type": "bed", "sound": "mudpot", "gain": 0.55},
+        {"type": "bed", "sound": "hot_spring", "gain": 0.25},
+        {"type": "pause", "seconds": 0.8},
+        {"type": "say", "voice": "narrator", "text": "Coming up, Fountain Paint Pot. One short boardwalk, and all four kinds of Yellowstone's thermal features."},
+        {"type": "pause", "seconds": 0.4},
+        {"type": "say", "voice": "storyteller", "text": "The star is the mud. Acid gas eats the rock into clay, and the ground just bubbles. In spring it's thin and splashy. By late summer, it's thick as paint."},
+        {"type": "pause", "seconds": 1.2}
+      ]
+    },
+    "Grand Prismatic Spring": {
+      "segments": [
+        {"type": "music", "sound": "transition", "gain": 0.5, "wait": false},
+        {"type": "bed", "sound": "hot_spring", "gain": 0.5},
+        {"type": "bed", "sound": "wind", "gain": 0.2},
+        {"type": "pause", "seconds": 0.8},
+        {"type": "say", "voice": "narrator", "text": "Look for the steam over the Midway Geyser Basin. Beneath it is Grand Prismatic Spring, the largest hot spring in the United States."},
+        {"type": "pause", "seconds": 0.4},
+        {"type": "say", "voice": "storyteller", "text": "Its colours aren't paint, or minerals. They're alive. Rings of tiny heat-loving microbes, each living at its own temperature. And at the centre, the water is too hot for almost anything. It glows a deep, impossible blue."},
+        {"type": "pause", "seconds": 0.4},
+        {"type": "say", "voice": "narrator", "text": "Next door, Excelsior Geyser pours thousands of gallons of boiling water into the river every minute."},
+        {"type": "pause", "seconds": 1.2}
+      ]
+    },
+    "Biscuit Basin": {
+      "segments": [
+        {"type": "music", "sound": "transition", "gain": 0.5, "wait": false},
+        {"type": "bed", "sound": "hot_spring", "gain": 0.5},
+        {"type": "pause", "seconds": 0.8},
+        {"type": "say", "voice": "narrator", "text": "Biscuit Basin."},
+        {"type": "pause", "seconds": 0.3},
+        {"type": "say", "voice": "storyteller", "text": "It's named for knobbly mineral lumps that once ringed Sapphire Pool, like biscuits on a plate. Then, in nineteen fifty-nine, an earthquake shook the ground, and Sapphire Pool blew most of them away."},
+        {"type": "sfx", "sound": "geyser_eruption", "gain": 0.45, "wait": false},
+        {"type": "pause", "seconds": 0.6},
+        {"type": "say", "voice": "narrator", "text": "In July twenty twenty-four, an explosion of steam here threw rocks into the air and tore up the boardwalk. The ground here is still very much alive."},
+        {"type": "pause", "seconds": 1.2}
+      ]
+    },
+    "Black Sand Basin": {
+      "segments": [
+        {"type": "music", "sound": "transition", "gain": 0.5, "wait": false},
+        {"type": "bed", "sound": "hot_spring", "gain": 0.4},
+        {"type": "bed", "sound": "birds", "gain": 0.25},
+        {"type": "pause", "seconds": 0.8},
+        {"type": "say", "voice": "narrator", "text": "Black Sand Basin, named for its sand of black volcanic glass."},
+        {"type": "pause", "seconds": 0.4},
+        {"type": "say", "voice": "storyteller", "text": "Early visitors had a favourite trick here. Drop a handkerchief into one small pool, and watch it get pulled under. A moment later, it came back up, clean. Then people started throwing in everything else, and the pool choked."},
+        {"type": "pause", "seconds": 0.3},
+        {"type": "say", "voice": "narrator", "text": "Which is why, today, nothing goes in."},
+        {"type": "pause", "seconds": 1.2}
+      ]
+    },
+    "Upper Geyser Basin": {
+      "segments": [
+        {"type": "music", "sound": "transition", "gain": 0.5, "wait": false},
+        {"type": "bed", "sound": "hot_spring", "gain": 0.5},
+        {"type": "bed", "sound": "wind", "gain": 0.2},
+        {"type": "pause", "seconds": 0.8},
+        {"type": "say", "voice": "narrator", "text": "You're entering the Upper Geyser Basin."},
+        {"type": "pause", "seconds": 0.3},
+        {"type": "say", "voice": "storyteller", "text": "About a hundred and fifty geysers, packed into roughly one square mile. Nowhere else on Earth comes close."},
+        {"type": "pause", "seconds": 1.2}
+      ]
+    },
+    "Old Faithful": {
+      "segments": [
+        {"type": "music", "sound": "transition", "gain": 0.5, "wait": false},
+        {"type": "bed", "sound": "hot_spring", "gain": 0.45},
+        {"type": "bed", "sound": "crowd", "gain": 0.15},
+        {"type": "pause", "seconds": 0.8},
+        {"type": "say", "voice": "narrator", "text": "Up ahead, Old Faithful."},
+        {"type": "pause", "seconds": 0.3},
+        {"type": "say", "voice": "storyteller", "text": "It isn't the tallest geyser here. It isn't even the most regular. But since eighteen seventy, it's the one everyone comes to see."},
+        {"type": "sfx", "sound": "geyser_eruption", "gain": 0.7, "wait": false},
+        {"type": "pause", "seconds": 1.0},
+        {"type": "say", "voice": "narrator", "text": "Every sixty to a hundred and ten minutes, it throws water up to a hundred and eighty-five feet into the sky."},
+        {"type": "pause", "seconds": 0.4},
+        {"type": "say", "voice": "storyteller", "text": "Rangers can predict it. A long eruption means a long wait. A short one, and you won't be waiting long at all."},
+        {"type": "pause", "seconds": 1.2}
+      ]
+    },
+    "Old Faithful Inn": {
+      "segments": [
+        {"type": "music", "sound": "transition", "gain": 0.5, "wait": false},
+        {"type": "bed", "sound": "campfire", "gain": 0.35},
+        {"type": "bed", "sound": "crowd", "gain": 0.15},
+        {"type": "pause", "seconds": 0.8},
+        {"type": "say", "voice": "narrator", "text": "Old Faithful Inn, finished in nineteen oh four."},
+        {"type": "pause", "seconds": 0.3},
+        {"type": "say", "voice": "storyteller", "text": "Step inside, and the lobby climbs storey after storey of rough lodgepole pine, all wrapped around one enormous stone fireplace. It's one of the largest log buildings in the world."},
+        {"type": "pause", "seconds": 1.2}
+      ]
+    },
+    "Kepler Cascades": {
+      "segments": [
+        {"type": "music", "sound": "transition", "gain": 0.5, "wait": false},
+        {"type": "bed", "sound": "waterfall", "gain": 0.5},
+        {"type": "bed", "sound": "forest", "gain": 0.25},
+        {"type": "pause", "seconds": 0.8},
+        {"type": "say", "voice": "narrator", "text": "Kepler Cascades. About a hundred and fifty feet of falling water, right beside the road."},
+        {"type": "pause", "seconds": 0.4},
+        {"type": "say", "voice": "storyteller", "text": "In eighteen eighty-one, the park's superintendent was showing Wyoming's governor around. The governor had brought his twelve-year-old son, Kepler. So the superintendent named the falls after the boy."},
+        {"type": "pause", "seconds": 0.3},
+        {"type": "say", "voice": "storyteller", "text": "Imagine being twelve, and getting a waterfall."},
+        {"type": "pause", "seconds": 1.2}
+      ]
+    },
+    "Isa Lake": {
+      "segments": [
+        {"type": "music", "sound": "transition", "gain": 0.5, "wait": false},
+        {"type": "bed", "sound": "lake", "gain": 0.5},
+        {"type": "bed", "sound": "wind", "gain": 0.3},
+        {"type": "pause", "seconds": 0.8},
+        {"type": "say", "voice": "narrator", "text": "You're crossing the Continental Divide at Craig Pass. That small pond with the lily pads is Isa Lake."},
+        {"type": "pause", "seconds": 0.4},
+        {"type": "say", "voice": "storyteller", "text": "Here's the puzzle. It drains to both oceans. But the Divide loops around the pass, so the water leaving the east side ends up in the Pacific, and the west side flows all the way to the Atlantic."},
+        {"type": "pause", "seconds": 0.3},
+        {"type": "say", "voice": "narrator", "text": "Backwards, and perfectly right."},
+        {"type": "pause", "seconds": 1.2}
+      ]
+    }
+  },
+  "ambient": [
+    {
+      "id": "fact-bison", "title": "Yellowstone's bison",
+      "segments": [
+        {"type": "bed", "sound": "meadow", "gain": 0.45},
+        {"type": "pause", "seconds": 0.8},
+        {"type": "say", "voice": "storyteller", "text": "Yellowstone is the only place in the United States where bison have lived continuously since prehistoric times."},
+        {"type": "sfx", "sound": "hoofbeats", "gain": 0.35, "wait": false},
+        {"type": "pause", "seconds": 0.4},
+        {"type": "say", "voice": "narrator", "text": "If they're on the road, stay in your car and let them pass. They were here first."},
+        {"type": "pause", "seconds": 1.0}
+      ]
+    },
+    {
+      "id": "fact-taq", "title": "A microbe that changed medicine",
+      "segments": [
+        {"type": "bed", "sound": "hot_spring", "gain": 0.35},
+        {"type": "pause", "seconds": 0.8},
+        {"type": "say", "voice": "narrator", "text": "In nineteen sixty-six, a microbiologist named Thomas Brock found a bacterium living in a Yellowstone hot spring."},
+        {"type": "pause", "seconds": 0.3},
+        {"type": "say", "voice": "storyteller", "text": "An enzyme from that one little microbe made the P C R test practical. DNA fingerprinting, medical testing, all of it, traces back to a boiling pool, somewhere out there."},
+        {"type": "pause", "seconds": 1.0}
+      ]
+    },
+    {
+      "id": "fact-wolves", "title": "The return of the wolves",
+      "segments": [
+        {"type": "bed", "sound": "wind", "gain": 0.4},
+        {"type": "pause", "seconds": 0.6},
+        {"type": "sfx", "sound": "wolf_howl", "gain": 0.5, "wait": false},
+        {"type": "pause", "seconds": 2.5},
+        {"type": "say", "voice": "narrator", "text": "By the nineteen twenties, gray wolves had been wiped out of Yellowstone."},
+        {"type": "pause", "seconds": 0.3},
+        {"type": "say", "voice": "storyteller", "text": "In nineteen ninety-five, they were brought back. And the whole landscape noticed. Elk moved differently. Scientists are still untangling everything that changed."},
+        {"type": "pause", "seconds": 1.0}
+      ]
+    },
+    {
+      "id": "fact-fires-1988", "title": "The fires of 1988",
+      "segments": [
+        {"type": "bed", "sound": "forest", "gain": 0.4},
+        {"type": "bed", "sound": "campfire", "gain": 0.15},
+        {"type": "pause", "seconds": 0.8},
+        {"type": "say", "voice": "narrator", "text": "In the summer of nineteen eighty-eight, fire burned about a third of Yellowstone."},
+        {"type": "pause", "seconds": 0.3},
+        {"type": "say", "voice": "storyteller", "text": "Those thick young pines along the road grew up afterwards. Many lodgepole cones are sealed shut with resin, and only intense heat opens them. The fire planted the forest you're driving through."},
+        {"type": "pause", "seconds": 1.0}
+      ]
+    },
+    {
+      "id": "fact-caldera", "title": "Driving through a volcano",
+      "segments": [
+        {"type": "bed", "sound": "wind", "gain": 0.35},
+        {"type": "pause", "seconds": 0.6},
+        {"type": "sfx", "sound": "thunder", "gain": 0.3, "wait": false},
+        {"type": "pause", "seconds": 1.2},
+        {"type": "say", "voice": "narrator", "text": "Much of this drive runs inside the Yellowstone Caldera."},
+        {"type": "pause", "seconds": 0.3},
+        {"type": "say", "voice": "storyteller", "text": "It's the hollow left by an eruption roughly six hundred thirty thousand years ago. It's so big you can't really see it from the ground. You're just, quietly, inside it."},
+        {"type": "pause", "seconds": 1.0}
+      ]
+    }
+  ]
+}

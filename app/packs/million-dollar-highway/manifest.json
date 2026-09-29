@@ -1,0 +1,1231 @@
+{
+ "format": "cairn.tour/2",
+ "id": "million-dollar-highway",
+ "version": 1,
+ "name": "Million Dollar Highway",
+ "region": "Colorado, USA",
+ "description": "10 stories across 26 km of road, including Silverton, Ouray and Durango and Silverton Narrow Gauge Railroad.",
+ "note": null,
+ "language": "en",
+ "generatedAt": "2026-09-29T17:40:24Z",
+ "generator": {
+  "engine": "cairn-engine/0.2",
+  "writer": "template",
+  "tts": "device",
+  "source": "fixture:san-juan-skyway"
+ },
+ "center": [
+  37.9436,
+  -107.67456
+ ],
+ "bounds": {
+  "south": 37.783550664750265,
+  "west": -107.74916184788442,
+  "north": 38.055949335249736,
+  "east": -107.62583815211558
+ },
+ "routeLengthM": 26201,
+ "route": [
+  [
+   37.8121,
+   -107.6628
+  ],
+  [
+   37.821,
+   -107.67
+  ],
+  [
+   37.83,
+   -107.679
+  ],
+  [
+   37.842,
+   -107.69
+  ],
+  [
+   37.856,
+   -107.701
+  ],
+  [
+   37.8667,
+   -107.7078
+  ],
+  [
+   37.88,
+   -107.715
+  ],
+  [
+   37.8986,
+   -107.7131
+  ],
+  [
+   37.91,
+   -107.706
+  ],
+  [
+   37.92,
+   -107.701
+  ],
+  [
+   37.929,
+   -107.696
+  ],
+  [
+   37.936,
+   -107.68
+  ],
+  [
+   37.95,
+   -107.674
+  ],
+  [
+   37.98,
+   -107.668
+  ],
+  [
+   37.995,
+   -107.664
+  ],
+  [
+   38.006,
+   -107.6632
+  ],
+  [
+   38.015,
+   -107.668
+  ],
+  [
+   38.0228,
+   -107.6714
+  ]
+ ],
+ "map": null,
+ "voices": {
+  "narrator": {
+   "style": "calm documentary narrator",
+   "device": {
+    "pitch": 0.92,
+    "rate": 0.97
+   }
+  },
+  "storyteller": {
+   "style": "warm storyteller",
+   "device": {
+    "pitch": 1.05,
+    "rate": 1.0
+   }
+  }
+ },
+ "kind": "tour",
+ "cell": null,
+ "travelSpeedMps": 15.0,
+ "intro": {
+  "id": "intro",
+  "title": "Welcome to Million Dollar Highway",
+  "writer": "template",
+  "estimatedSeconds": 18.8,
+  "transcript": "Welcome to the Million Dollar Highway. Along this drive there are 10 stories waiting, including Silverton, Ouray and Durango and Silverton Narrow Gauge Railroad. Keep your eyes on the road. I'll tell you when something's worth a look.",
+  "segments": [
+   {
+    "type": "music",
+    "sound": "intro",
+    "gain": 0.7,
+    "wait": false,
+    "audio": "sounds/intro.mp3",
+    "duration": 9.25
+   },
+   {
+    "type": "bed",
+    "sound": "pad",
+    "gain": 0.35,
+    "audio": "sounds/pad.mp3",
+    "duration": 24.0,
+    "loop": true
+   },
+   {
+    "type": "pause",
+    "seconds": 2.2
+   },
+   {
+    "type": "say",
+    "voice": "narrator",
+    "text": "Welcome to the Million Dollar Highway."
+   },
+   {
+    "type": "bed",
+    "sound": "town",
+    "gain": 0.4,
+    "audio": "sounds/town.mp3",
+    "duration": 24.0,
+    "loop": true
+   },
+   {
+    "type": "say",
+    "voice": "narrator",
+    "text": "Along this drive there are 10 stories waiting, including Silverton, Ouray and Durango and Silverton Narrow Gauge Railroad."
+   },
+   {
+    "type": "pause",
+    "seconds": 0.4
+   },
+   {
+    "type": "say",
+    "voice": "storyteller",
+    "text": "Keep your eyes on the road. I'll tell you when something's worth a look."
+   },
+   {
+    "type": "pause",
+    "seconds": 1.0
+   }
+  ]
+ },
+ "outro": {
+  "audio": "sounds/outro.mp3"
+ },
+ "stops": [
+  {
+   "id": "durango-and-silverton-narrow-gauge-railroad-0",
+   "name": "Durango and Silverton Narrow Gauge Railroad",
+   "order": 0,
+   "category": "railway",
+   "themes": [
+    "train",
+    "river",
+    "mining"
+   ],
+   "summary": "heritage narrow-gauge railroad in Colorado",
+   "place": {
+    "lat": 37.8105,
+    "lon": -107.661
+   },
+   "trigger": {
+    "lat": 37.8121,
+    "lon": -107.6628,
+    "radius": 120
+   },
+   "priority": 3,
+   "side": "right",
+   "along": 0,
+   "score": 5.874,
+   "sources": [],
+   "episode": {
+    "title": "Durango and Silverton Narrow Gauge Railroad",
+    "writer": "template",
+    "estimatedSeconds": 25.1,
+    "transcript": "Coming up on your right, the Durango and Silverton Narrow Gauge Railroad, a forty-five-mile heritage railway between Durango and Silverton. The Denver and Rio Grande Railway built the line in 1881 and 1882 to haul silver and gold ore out of the San Juan Mountains. The line was designated a National Historic Landmark in 1961.",
+    "segments": [
+     {
+      "type": "music",
+      "sound": "transition",
+      "gain": 0.5,
+      "wait": false,
+      "audio": "sounds/transition.mp3",
+      "duration": 6.35
+     },
+     {
+      "type": "bed",
+      "sound": "train",
+      "gain": 0.55,
+      "audio": "sounds/train.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "bed",
+      "sound": "river",
+      "gain": 0.3,
+      "audio": "sounds/river.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "pause",
+      "seconds": 0.8
+     },
+     {
+      "type": "say",
+      "voice": "narrator",
+      "text": "Coming up on your right, the Durango and Silverton Narrow Gauge Railroad, a forty-five-mile heritage railway between Durango and Silverton."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.4
+     },
+     {
+      "type": "say",
+      "voice": "storyteller",
+      "text": "The Denver and Rio Grande Railway built the line in 1881 and 1882 to haul silver and gold ore out of the San Juan Mountains."
+     },
+     {
+      "type": "sfx",
+      "sound": "train_whistle",
+      "gain": 0.6,
+      "wait": false,
+      "audio": "sounds/train_whistle.mp3",
+      "duration": 7.7
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "say",
+      "voice": "narrator",
+      "text": "The line was designated a National Historic Landmark in 1961."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "pause",
+      "seconds": 1.2
+     }
+    ]
+   }
+  },
+  {
+   "id": "silverton-colorado-1",
+   "name": "Silverton, Colorado",
+   "order": 1,
+   "category": "town",
+   "themes": [
+    "town",
+    "mining"
+   ],
+   "summary": "town in San Juan County, Colorado",
+   "place": {
+    "lat": 37.8119,
+    "lon": -107.6645
+   },
+   "trigger": {
+    "lat": 37.812567,
+    "lon": -107.663178,
+    "radius": 120
+   },
+   "priority": 3,
+   "side": "left",
+   "along": 62,
+   "score": 6.582,
+   "sources": [],
+   "episode": {
+    "title": "Silverton, Colorado",
+    "writer": "template",
+    "estimatedSeconds": 30.3,
+    "transcript": "On your left, Silverton, a former silver mining town in the San Juan Mountains at an elevation of more than nine thousand three hundred feet. It was laid out in 1874, and miners liked to say they had no gold, but silver by the ton. The last large mine in the area, the Sunnyside, closed in 1991, and the town now lives on tourism and the narrow-gauge railroad.",
+    "segments": [
+     {
+      "type": "music",
+      "sound": "transition",
+      "gain": 0.5,
+      "wait": false,
+      "audio": "sounds/transition.mp3",
+      "duration": 6.35
+     },
+     {
+      "type": "bed",
+      "sound": "town",
+      "gain": 0.55,
+      "audio": "sounds/town.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "bed",
+      "sound": "mine",
+      "gain": 0.3,
+      "audio": "sounds/mine.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "pause",
+      "seconds": 0.8
+     },
+     {
+      "type": "say",
+      "voice": "narrator",
+      "text": "On your left, Silverton, a former silver mining town in the San Juan Mountains at an elevation of more than nine thousand three hundred feet."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.4
+     },
+     {
+      "type": "say",
+      "voice": "storyteller",
+      "text": "It was laid out in 1874, and miners liked to say they had no gold, but silver by the ton."
+     },
+     {
+      "type": "sfx",
+      "sound": "blast",
+      "gain": 0.6,
+      "wait": false,
+      "audio": "sounds/blast.mp3",
+      "duration": 5.5
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "say",
+      "voice": "narrator",
+      "text": "The last large mine in the area, the Sunnyside, closed in 1991, and the town now lives on tourism and the narrow-gauge railroad."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "pause",
+      "seconds": 1.2
+     }
+    ]
+   }
+  },
+  {
+   "id": "red-mountain-pass-2",
+   "name": "Red Mountain Pass",
+   "order": 2,
+   "category": "geology",
+   "themes": [
+    "mountain",
+    "wind",
+    "construction"
+   ],
+   "summary": "mountain pass in the San Juan Mountains",
+   "place": {
+    "lat": 37.8986,
+    "lon": -107.7131
+   },
+   "trigger": {
+    "lat": 37.8986,
+    "lon": -107.7131,
+    "radius": 350
+   },
+   "priority": 3,
+   "side": null,
+   "along": 10942,
+   "score": 4.113,
+   "sources": [],
+   "episode": {
+    "title": "Red Mountain Pass",
+    "writer": "template",
+    "estimatedSeconds": 28.7,
+    "transcript": "Just ahead, Red Mountain Pass, a mountain pass at eleven thousand eighteen feet on the highway between Silverton and Ouray. It is named for the three Red Mountains nearby, whose slopes are stained red and orange by iron oxide in the rock. The road over the pass crosses dozens of avalanche paths and is one of the most avalanche-prone highways in the United States.",
+    "segments": [
+     {
+      "type": "music",
+      "sound": "transition",
+      "gain": 0.5,
+      "wait": false,
+      "audio": "sounds/transition.mp3",
+      "duration": 6.35
+     },
+     {
+      "type": "bed",
+      "sound": "wind",
+      "gain": 0.55,
+      "audio": "sounds/wind.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "bed",
+      "sound": "construction",
+      "gain": 0.3,
+      "audio": "sounds/construction.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "pause",
+      "seconds": 0.8
+     },
+     {
+      "type": "say",
+      "voice": "narrator",
+      "text": "Just ahead, Red Mountain Pass, a mountain pass at eleven thousand eighteen feet on the highway between Silverton and Ouray."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.4
+     },
+     {
+      "type": "say",
+      "voice": "storyteller",
+      "text": "It is named for the three Red Mountains nearby, whose slopes are stained red and orange by iron oxide in the rock."
+     },
+     {
+      "type": "sfx",
+      "sound": "raptor",
+      "gain": 0.6,
+      "wait": false,
+      "audio": "sounds/raptor.mp3",
+      "duration": 5.35
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "say",
+      "voice": "narrator",
+      "text": "The road over the pass crosses dozens of avalanche paths and is one of the most avalanche-prone highways in the United States."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "pause",
+      "seconds": 1.2
+     }
+    ]
+   }
+  },
+  {
+   "id": "yankee-girl-mine-3",
+   "name": "Yankee Girl Mine",
+   "order": 3,
+   "category": "mining",
+   "themes": [
+    "mining",
+    "mountain"
+   ],
+   "summary": "historic silver mine in the Red Mountain mining district",
+   "place": {
+    "lat": 37.929,
+    "lon": -107.699
+   },
+   "trigger": {
+    "lat": 37.92813,
+    "lon": -107.696483,
+    "radius": 300
+   },
+   "priority": 2,
+   "side": "left",
+   "along": 14535,
+   "score": 3.548,
+   "sources": [],
+   "episode": {
+    "title": "Yankee Girl Mine",
+    "writer": "template",
+    "estimatedSeconds": 23.5,
+    "transcript": "Coming up on your left, the Yankee Girl Mine, one of the richest silver mines of the Red Mountain mining district. Prospectors struck its ore body in 1882, setting off a rush that filled the valley with camps. Miners followed the ore deep underground, where acidic water corroded pumps and rails.",
+    "segments": [
+     {
+      "type": "music",
+      "sound": "transition",
+      "gain": 0.5,
+      "wait": false,
+      "audio": "sounds/transition.mp3",
+      "duration": 6.35
+     },
+     {
+      "type": "bed",
+      "sound": "mine",
+      "gain": 0.55,
+      "audio": "sounds/mine.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "bed",
+      "sound": "wind",
+      "gain": 0.3,
+      "audio": "sounds/wind.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "pause",
+      "seconds": 0.8
+     },
+     {
+      "type": "say",
+      "voice": "narrator",
+      "text": "Coming up on your left, the Yankee Girl Mine, one of the richest silver mines of the Red Mountain mining district."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.4
+     },
+     {
+      "type": "say",
+      "voice": "storyteller",
+      "text": "Prospectors struck its ore body in 1882, setting off a rush that filled the valley with camps."
+     },
+     {
+      "type": "sfx",
+      "sound": "blast",
+      "gain": 0.6,
+      "wait": false,
+      "audio": "sounds/blast.mp3",
+      "duration": 5.5
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "say",
+      "voice": "storyteller",
+      "text": "Miners followed the ore deep underground, where acidic water corroded pumps and rails."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "pause",
+      "seconds": 1.2
+     }
+    ]
+   }
+  },
+  {
+   "id": "ironton-colorado-4",
+   "name": "Ironton, Colorado",
+   "order": 4,
+   "category": "town",
+   "themes": [
+    "town",
+    "mountain",
+    "wind",
+    "mining"
+   ],
+   "summary": "ghost town in Ouray County, Colorado",
+   "place": {
+    "lat": 37.9336,
+    "lon": -107.677
+   },
+   "trigger": {
+    "lat": 37.936,
+    "lon": -107.68,
+    "radius": 600
+   },
+   "priority": 2,
+   "side": "right",
+   "along": 16245,
+   "score": 2.787,
+   "sources": [],
+   "episode": {
+    "title": "Ironton, Colorado",
+    "writer": "template",
+    "estimatedSeconds": 27.9,
+    "transcript": "On your right, Ironton, a ghost town in a broad valley below Red Mountain Pass. Founded in 1883 as a supply town for the Red Mountain mines, it had hotels, saloons and a stage stop. In the late 1880s Otto Mears built the Silverton Railroad over the pass to reach it, including a turntable housed in a covered shed at Corkscrew Gulch.",
+    "segments": [
+     {
+      "type": "music",
+      "sound": "transition",
+      "gain": 0.5,
+      "wait": false,
+      "audio": "sounds/transition.mp3",
+      "duration": 6.35
+     },
+     {
+      "type": "bed",
+      "sound": "town",
+      "gain": 0.55,
+      "audio": "sounds/town.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "bed",
+      "sound": "wind",
+      "gain": 0.3,
+      "audio": "sounds/wind.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "pause",
+      "seconds": 0.8
+     },
+     {
+      "type": "say",
+      "voice": "narrator",
+      "text": "On your right, Ironton, a ghost town in a broad valley below Red Mountain Pass."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.4
+     },
+     {
+      "type": "say",
+      "voice": "storyteller",
+      "text": "Founded in 1883 as a supply town for the Red Mountain mines, it had hotels, saloons and a stage stop."
+     },
+     {
+      "type": "sfx",
+      "sound": "raptor",
+      "gain": 0.6,
+      "wait": false,
+      "audio": "sounds/raptor.mp3",
+      "duration": 5.35
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "say",
+      "voice": "storyteller",
+      "text": "In the late 1880s Otto Mears built the Silverton Railroad over the pass to reach it, including a turntable housed in a covered shed at Corkscrew Gulch."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "pause",
+      "seconds": 1.2
+     }
+    ]
+   }
+  },
+  {
+   "id": "million-dollar-highway-5",
+   "name": "Million Dollar Highway",
+   "order": 5,
+   "category": "roads",
+   "themes": [
+    "construction",
+    "river"
+   ],
+   "summary": "section of U.S. Route 550 in Colorado",
+   "place": {
+    "lat": 37.995,
+    "lon": -107.664
+   },
+   "trigger": {
+    "lat": 37.995,
+    "lon": -107.664,
+    "radius": 259
+   },
+   "priority": 2,
+   "side": null,
+   "along": 22966,
+   "score": 3.594,
+   "sources": [],
+   "episode": {
+    "title": "Million Dollar Highway",
+    "writer": "template",
+    "estimatedSeconds": 25.9,
+    "transcript": "You're now passing Million Dollar Highway. The Million Dollar Highway is the twenty-five-mile stretch of U.S. Route 550 between Silverton and Ouray, cut into cliffs above the Uncompahgre Gorge, often with no guardrails and sheer drops beside the lanes. It follows the route of a toll road that Otto Mears blasted through the canyon in the 1880s.",
+    "segments": [
+     {
+      "type": "music",
+      "sound": "transition",
+      "gain": 0.5,
+      "wait": false,
+      "audio": "sounds/transition.mp3",
+      "duration": 6.35
+     },
+     {
+      "type": "bed",
+      "sound": "construction",
+      "gain": 0.55,
+      "audio": "sounds/construction.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "bed",
+      "sound": "river",
+      "gain": 0.3,
+      "audio": "sounds/river.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "pause",
+      "seconds": 0.8
+     },
+     {
+      "type": "say",
+      "voice": "narrator",
+      "text": "You're now passing Million Dollar Highway."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.4
+     },
+     {
+      "type": "say",
+      "voice": "narrator",
+      "text": "The Million Dollar Highway is the twenty-five-mile stretch of U.S. Route 550 between Silverton and Ouray, cut into cliffs above the Uncompahgre Gorge, often with no guardrails and sheer drops beside the lanes."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "say",
+      "voice": "storyteller",
+      "text": "It follows the route of a toll road that Otto Mears blasted through the canyon in the 1880s."
+     },
+     {
+      "type": "sfx",
+      "sound": "blast",
+      "gain": 0.6,
+      "wait": false,
+      "audio": "sounds/blast.mp3",
+      "duration": 5.5
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "pause",
+      "seconds": 1.2
+     }
+    ]
+   }
+  },
+  {
+   "id": "uncompahgre-gorge-6",
+   "name": "Uncompahgre Gorge",
+   "order": 6,
+   "category": "water",
+   "themes": [
+    "river"
+   ],
+   "summary": "canyon of the Uncompahgre River",
+   "place": {
+    "lat": 38.0,
+    "lon": -107.66
+   },
+   "trigger": {
+    "lat": 38.000164,
+    "lon": -107.663624,
+    "radius": 259
+   },
+   "priority": 1,
+   "side": "right",
+   "along": 23541,
+   "score": 1.998,
+   "sources": [],
+   "episode": {
+    "title": "Uncompahgre Gorge",
+    "writer": "template",
+    "estimatedSeconds": 14.3,
+    "transcript": "On your right, the Uncompahgre Gorge, a deep, narrow canyon where the Uncompahgre River drops from the Red Mountain district toward Ouray. The highway clings to its east wall.",
+    "segments": [
+     {
+      "type": "music",
+      "sound": "transition",
+      "gain": 0.5,
+      "wait": false,
+      "audio": "sounds/transition.mp3",
+      "duration": 6.35
+     },
+     {
+      "type": "bed",
+      "sound": "river",
+      "gain": 0.55,
+      "audio": "sounds/river.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "pause",
+      "seconds": 0.8
+     },
+     {
+      "type": "say",
+      "voice": "narrator",
+      "text": "On your right, the Uncompahgre Gorge, a deep, narrow canyon where the Uncompahgre River drops from the Red Mountain district toward Ouray."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.4
+     },
+     {
+      "type": "say",
+      "voice": "storyteller",
+      "text": "The highway clings to its east wall."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "pause",
+      "seconds": 1.2
+     }
+    ]
+   }
+  },
+  {
+   "id": "bear-creek-falls-7",
+   "name": "Bear Creek Falls",
+   "order": 7,
+   "category": "water",
+   "themes": [
+    "waterfall",
+    "river",
+    "construction",
+    "wind"
+   ],
+   "summary": "waterfall near Ouray, Colorado",
+   "place": {
+    "lat": 38.0056,
+    "lon": -107.6636
+   },
+   "trigger": {
+    "lat": 38.005583,
+    "lon": -107.66323,
+    "radius": 272
+   },
+   "priority": 1,
+   "side": null,
+   "along": 24144,
+   "score": 2.643,
+   "sources": [],
+   "episode": {
+    "title": "Bear Creek Falls",
+    "writer": "template",
+    "estimatedSeconds": 24.3,
+    "transcript": "Up ahead, Bear Creek Falls, a waterfall where Bear Creek plunges into the Uncompahgre Gorge, directly beneath a highway bridge. Otto Mears once kept a toll gate here on his road between Ouray and the mines, charging travellers, wagons and pack animals to pass. The toll house site sits beside an overlook today.",
+    "segments": [
+     {
+      "type": "music",
+      "sound": "transition",
+      "gain": 0.5,
+      "wait": false,
+      "audio": "sounds/transition.mp3",
+      "duration": 6.35
+     },
+     {
+      "type": "bed",
+      "sound": "waterfall",
+      "gain": 0.55,
+      "audio": "sounds/waterfall.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "bed",
+      "sound": "river",
+      "gain": 0.3,
+      "audio": "sounds/river.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "pause",
+      "seconds": 0.8
+     },
+     {
+      "type": "say",
+      "voice": "narrator",
+      "text": "Up ahead, Bear Creek Falls, a waterfall where Bear Creek plunges into the Uncompahgre Gorge, directly beneath a highway bridge."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.4
+     },
+     {
+      "type": "say",
+      "voice": "storyteller",
+      "text": "Otto Mears once kept a toll gate here on his road between Ouray and the mines, charging travellers, wagons and pack animals to pass."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "say",
+      "voice": "narrator",
+      "text": "The toll house site sits beside an overlook today."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "pause",
+      "seconds": 1.2
+     }
+    ]
+   }
+  },
+  {
+   "id": "ouray-hot-springs-8",
+   "name": "Ouray Hot Springs",
+   "order": 8,
+   "category": "geology",
+   "themes": [
+    "hot_spring"
+   ],
+   "summary": "hot springs pool in Ouray, Colorado",
+   "place": {
+    "lat": 38.029,
+    "lon": -107.672
+   },
+   "trigger": {
+    "lat": 38.0228,
+    "lon": -107.6714,
+    "radius": 120
+   },
+   "priority": 1,
+   "side": "right",
+   "along": 26192,
+   "score": 2.131,
+   "sources": [],
+   "episode": {
+    "title": "Ouray Hot Springs",
+    "writer": "template",
+    "estimatedSeconds": 14.8,
+    "transcript": "On your right, Ouray Hot Springs, a public pool fed by natural hot springs at the north end of town. The Ute people used the springs long before miners arrived.",
+    "segments": [
+     {
+      "type": "music",
+      "sound": "transition",
+      "gain": 0.5,
+      "wait": false,
+      "audio": "sounds/transition.mp3",
+      "duration": 6.35
+     },
+     {
+      "type": "bed",
+      "sound": "hot_spring",
+      "gain": 0.55,
+      "audio": "sounds/hot_spring.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "pause",
+      "seconds": 0.8
+     },
+     {
+      "type": "say",
+      "voice": "narrator",
+      "text": "On your right, Ouray Hot Springs, a public pool fed by natural hot springs at the north end of town."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.4
+     },
+     {
+      "type": "say",
+      "voice": "storyteller",
+      "text": "The Ute people used the springs long before miners arrived."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "pause",
+      "seconds": 1.2
+     }
+    ]
+   }
+  },
+  {
+   "id": "ouray-colorado-9",
+   "name": "Ouray, Colorado",
+   "order": 9,
+   "category": "town",
+   "themes": [
+    "town",
+    "mining"
+   ],
+   "summary": "city in Ouray County, Colorado",
+   "place": {
+    "lat": 38.0228,
+    "lon": -107.6714
+   },
+   "trigger": {
+    "lat": 38.0228,
+    "lon": -107.6714,
+    "radius": 120
+   },
+   "priority": 3,
+   "side": null,
+   "along": 26192,
+   "score": 6.487,
+   "sources": [],
+   "episode": {
+    "title": "Ouray, Colorado",
+    "writer": "template",
+    "estimatedSeconds": 32.7,
+    "transcript": "Just ahead, Ouray, a small mountain town boxed in by steep peaks, nicknamed the Switzerland of America. It was founded as a mining camp in 1876 and named after Chief Ouray, a leader of the Ute people who negotiated with the United States government during the years the Utes lost most of their Colorado lands. Hot springs rise at the edge of town, and many of its Victorian buildings survive from the mining boom.",
+    "segments": [
+     {
+      "type": "music",
+      "sound": "transition",
+      "gain": 0.5,
+      "wait": false,
+      "audio": "sounds/transition.mp3",
+      "duration": 6.35
+     },
+     {
+      "type": "bed",
+      "sound": "town",
+      "gain": 0.55,
+      "audio": "sounds/town.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "bed",
+      "sound": "mine",
+      "gain": 0.3,
+      "audio": "sounds/mine.mp3",
+      "duration": 24.0,
+      "loop": true
+     },
+     {
+      "type": "pause",
+      "seconds": 0.8
+     },
+     {
+      "type": "say",
+      "voice": "narrator",
+      "text": "Just ahead, Ouray, a small mountain town boxed in by steep peaks, nicknamed the Switzerland of America."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.4
+     },
+     {
+      "type": "say",
+      "voice": "storyteller",
+      "text": "It was founded as a mining camp in 1876 and named after Chief Ouray, a leader of the Ute people who negotiated with the United States government during the years the Utes lost most of their Colorado lands."
+     },
+     {
+      "type": "sfx",
+      "sound": "blast",
+      "gain": 0.6,
+      "wait": false,
+      "audio": "sounds/blast.mp3",
+      "duration": 5.5
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "say",
+      "voice": "storyteller",
+      "text": "Hot springs rise at the edge of town, and many of its Victorian buildings survive from the mining boom."
+     },
+     {
+      "type": "pause",
+      "seconds": 0.35
+     },
+     {
+      "type": "pause",
+      "seconds": 1.2
+     }
+    ]
+   }
+  }
+ ],
+ "ambient": [],
+ "attribution": [
+  "Demo data written for Cairn; coordinates approximate.",
+  "Sound design procedurally generated by the Cairn engine."
+ ],
+ "assets": [
+  {
+   "path": "sounds/blast.mp3",
+   "bytes": 66528,
+   "sha256": "36fb306d5fb7d30dc6f9672d7b8893a116bba87eaded98419361edb88fbae260",
+   "type": "audio/mpeg"
+  },
+  {
+   "path": "sounds/construction.mp3",
+   "bytes": 240480,
+   "sha256": "4a0968164d1198f8f61b1bddf27184c76376ec9dd623b2c6e4a60fc34670653e",
+   "type": "audio/mpeg"
+  },
+  {
+   "path": "sounds/hot_spring.mp3",
+   "bytes": 240480,
+   "sha256": "4bdd5e34a8e894865ed2781f828f9ed4264157d35160499fe514de43776892ff",
+   "type": "audio/mpeg"
+  },
+  {
+   "path": "sounds/intro.mp3",
+   "bytes": 111456,
+   "sha256": "b5cff28873b87b5f27d01602cca2a4490b615b9f5b0bf12061935c45a472574e",
+   "type": "audio/mpeg"
+  },
+  {
+   "path": "sounds/mine.mp3",
+   "bytes": 240480,
+   "sha256": "755087058fbdd27b13d280f297ed2a28687a317ab7d366f7891df2bc691a7f34",
+   "type": "audio/mpeg"
+  },
+  {
+   "path": "sounds/outro.mp3",
+   "bytes": 99792,
+   "sha256": "62d7fc8567818a698d432ab0bfaa43680a247cdceb8fcc9caa4ec24600d6673d",
+   "type": "audio/mpeg"
+  },
+  {
+   "path": "sounds/pad.mp3",
+   "bytes": 240480,
+   "sha256": "bde9a173008b0f7d742cee7110790bc43d163be60ae9d26f64cf33c9902edd53",
+   "type": "audio/mpeg"
+  },
+  {
+   "path": "sounds/raptor.mp3",
+   "bytes": 64800,
+   "sha256": "cb2ff18c68dda8ad0798d83c900cc634262f4be27a4d6a10cc5d63b515cab9c3",
+   "type": "audio/mpeg"
+  },
+  {
+   "path": "sounds/river.mp3",
+   "bytes": 240480,
+   "sha256": "484825412a87a1537471e002dcea1d6fddb6522b3c4a7b0cad67f3c30301b904",
+   "type": "audio/mpeg"
+  },
+  {
+   "path": "sounds/town.mp3",
+   "bytes": 240480,
+   "sha256": "855f8964736360909846f0faea257bea875c08536e8653f2ba7e6aa3eddf556b",
+   "type": "audio/mpeg"
+  },
+  {
+   "path": "sounds/train.mp3",
+   "bytes": 240480,
+   "sha256": "5ccd3639c8a6f33b881ee0ae77fa51fb2796bf1c0dd6ad3e38fd0262dbc07a6d",
+   "type": "audio/mpeg"
+  },
+  {
+   "path": "sounds/train_whistle.mp3",
+   "bytes": 92880,
+   "sha256": "5b2470380ab8bacd16079ecafb3df17505b1ed3b945c25d5694117eea680cb8b",
+   "type": "audio/mpeg"
+  },
+  {
+   "path": "sounds/transition.mp3",
+   "bytes": 76896,
+   "sha256": "4db773bed704b93c766992ba19db7899d1751696611bca1cb205e8c75365ef38",
+   "type": "audio/mpeg"
+  },
+  {
+   "path": "sounds/waterfall.mp3",
+   "bytes": 240480,
+   "sha256": "76dac1fb4ca270368fdef531e76aaf1fa54239546b4b497c3bab43a54fb8313e",
+   "type": "audio/mpeg"
+  },
+  {
+   "path": "sounds/wind.mp3",
+   "bytes": 240480,
+   "sha256": "4f937263965526160aadc11afd972c0559d9575cab9f45b7f97dda9a26e0141a",
+   "type": "audio/mpeg"
+  }
+ ],
+ "totalBytes": 2676672
+}
